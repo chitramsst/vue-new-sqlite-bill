@@ -4,6 +4,10 @@ let mainWindow;
 global.share = { app, ipcMain }
 const isDev = process.env.IS_DEV == "true" ? true : false;
 
+let { runSeeders } = require('./database/db.js');
+let db = require('./database/db.js')()
+
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     autoHideMenuBar : true,
@@ -28,6 +32,7 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
+  await readySqlite()
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
@@ -35,6 +40,20 @@ app.whenReady().then(async () => {
     }
   })
 })
+
+async function readySqlite() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await db.sequelize.sync({ alter: { drop: false } });
+      runSeeders();
+      resolve()
+    }
+    catch (e) {
+      console.log(e)
+      resolve()
+    }
+  })
+}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

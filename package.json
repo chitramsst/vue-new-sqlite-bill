@@ -2,8 +2,7 @@
   "name": "vue-bill",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
-  "main": "electron/electron.cjs",
+  "main": "electron/electron.js",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -17,9 +16,12 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.2",
+    "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "pinia": "^2.1.7",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "wait-on": "^7.2.0"
