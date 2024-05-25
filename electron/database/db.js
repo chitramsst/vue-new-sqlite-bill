@@ -37,7 +37,7 @@ module.exports.runSeeders = async function () {
         username: "admin",
         email: "admin@admin.com",
         password: password,
-        user_type: 2,
+        user_type: 1,
       });
     }
     return false;

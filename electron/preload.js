@@ -33,7 +33,7 @@ const {
       }
     },
     invoke: (channel, data) => {
-      let validChannels = [];  // <-- Array of all ipcMain Channels used in the electron
+      let validChannels = ['database-function'];  // <-- Array of all ipcMain Channels used in the electron
       if (validChannels.includes(channel)) {
         return ipcRenderer.invoke(channel, data);
       }

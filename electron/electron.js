@@ -6,6 +6,7 @@ const isDev = process.env.IS_DEV == "true" ? true : false;
 
 let { runSeeders } = require('./database/db.js');
 let db = require('./database/db.js')()
+require('./database/dbHandler')
 
 
 function createWindow() {

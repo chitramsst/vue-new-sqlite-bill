@@ -1,1 +1,15 @@
 /Users/chitra/Library/Application Support/vue-bill/database.sqlite
+
+2.
+postcss.config.js
+
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+3. 
+remove type=module
+in package.json

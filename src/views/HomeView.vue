@@ -75,7 +75,7 @@
                 </button>
                 <div v-if="menuOpen"
                   class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                  <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100" @click="logout">Logout</a>
                 </div>
               </div>
             </div>
@@ -204,11 +204,13 @@
   </div>
 </template>
 <script>
+import { useAuthStore } from '@/stores/authStore';
 export default {
   data() {
     return {
       menuOpen: false,
       count: new Array(10).fill(1),
+      authStore : useAuthStore()
     };
   },
   created(){
@@ -230,7 +232,12 @@ export default {
         this.count[n]=this.count[n]-1;
       }
       
-    }
+    },
+		logout()
+		{
+			this.authStore.$reset()
+			this.$router.push({name : 'login'})
+		}
   }
 };
 </script>
