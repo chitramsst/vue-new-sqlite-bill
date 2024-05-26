@@ -1,9 +1,9 @@
 <template>
   <div class="flex h-screen">
     <!-- sidebar -->
-    <div class="w-[100px] bg-black/90 flex justify-start flex-col items-center space-y-6">
+    <div class="w-[100px] bg-sidebar flex justify-start flex-col items-center space-y-6">
       <p
-        class=" text-white text-wrap  bg-green-500 rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10">
+        class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10">
         <i class="fa-brands fa-canadian-maple-leaf"></i>
       </p>
       <ul class="mt-5 flex flex-col space-y-5">
@@ -38,28 +38,28 @@
     <div class="w-full ">
 
       <!-- header section  -->
-      <div class="h-[7%]  shadow-sm  border-b-[0.5px] border-[#C1E1C1] flex flex-row justify-between p-5 items-center">
+      <div class="h-[7%]  shadow-sm  border-b-[0.5px] border-border flex flex-row justify-between p-5 items-center">
         <div class=" text-sm">
-          <input type="text" class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-2 px-3 w-[300%] outline-0"
+          <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[300%] outline-0"
             placeholder="Choose the product to add cart" />
 
         </div>
         <div class="flex flex-row space-x-5">
           <div class="flex flex-row space-x-2">
             <p
-              class=" text-white py-2 px-3 text-wrap  bg-green-500 rounded-lg flex items-center justify-center gap-3 text-sm">
+              class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
               <i class="fas fa-plus"></i> Create a Note
             </p>
             <p
-              class="text-gray-500 py-2 px-3 text-wrap  border-[0.5px] border-[#C1E1C1]  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
+              class="text-gray-500 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
               <i class="fas fa-envelope"></i>
             </p>
             <p
-              class="text-gray-500 py-2 px-3 text-wrap  border-[0.5px] border-[#C1E1C1]  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
+              class="text-gray-500 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
               <i class="fas fa-bell"></i>
             </p>
           </div>
-          <div class="border-l border-[#C1E1C1] h-7 mt-1 "></div>
+          <div class="border-l border-border h-7 mt-1 "></div>
           <div>
             <div class="flex items-center space-x-2 flex-row">
               <img src="https://via.placeholder.com/50" alt="Avatar"
@@ -87,7 +87,7 @@
 
       <div class="h-[93%] flex flex-row w-full">
         <!-- body item section section  -->
-        <div class="w-9/12 border-[#C1E1C1]  shadow-sm border-r-[0.5px] h-full ">
+        <div class="w-9/12 border-border  shadow-sm border-r-[0.5px] h-full ">
           <!-- category section  -->
           <div class="h-[7%]  shadow-sm  border-b-[0.5px] flex items-center p-7 space-x-12">
             <p
@@ -118,7 +118,7 @@
           <!-- item section -->
           <div class="h-[93%] p-7 w-full grid grid-cols-4 gap-10 ">
             <div v-for="n in 8" :key="n"
-              class="flex flex-col space-y-1 border-[0.5px] border-[#C1E1C1] rounded-lg px-3 pt-3">
+              class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 pt-3">
               <img
                 src="https://images.meesho.com/images/ratings_reviews/2541941610/2558399344/2541941610_2558399344_2de3b2ae89d32_512.jpeg"
                 class="max-h-[180px] w-[300px] rounded-lg resize shadow-xl" />
@@ -127,13 +127,13 @@
                 <p class="text-xs text-gray-400"> Artificial potted, indoor/outdoor Whitley Giant, 9cm</p>
               </div>
               <div class="flex justify-between items-center">
-                <p class="font-bold text-xs text-green-500"> $50 </p>
-                <p class="text-xs text-gray-400 border border-[#C1E1C1]/20 bg-[#C1E1C1]/20 px-3 py-1 rounded-full">
+                <p class="font-bold text-xs text-primary"> $50 </p>
+                <p class="text-xs text-gray-400 border border-border/20 bg-border/20 px-3 py-1 rounded-full">
                   53 items</p>
               </div>
               <div class="pt-2">
                 <p
-                  class="  py-2 px-3 text-wrap border border-[#C1E1C1] rounded-lg flex items-center justify-center text-xs">
+                  class="  py-2 px-3 text-wrap border border-border rounded-lg flex items-center justify-center text-xs">
                   <i class="fas fa-plus pr-2"></i> Add To Cart
                 </p>
               </div>
@@ -153,47 +153,47 @@
               <div class="flex flex-col space-y-2 w-2/4">
                 <p class=" text-sm"> Whity Giant Plants</p>
                 <p class="text-xs text-gray-400"> Artificial potted, indoor/outdoor Whitley Giant, 9cm</p>
-                <p class="font-bold text-xs text-green-500"> $50 </p>
+                <p class="font-bold text-xs text-primary"> $50 </p>
               </div>
               <div class="flex flex-row space-x-1 justify-center items-center w-1/4">
                 <p
-                  class=" text-gray-500 text-wrap border-[0.5px]  border-[#C1E1C1]  rounded-lg flex items-center justify-center gap-3 text-md  h-7 w-7" @click="decrement(n)">
+                  class=" text-gray-500 text-wrap border-[0.5px]  border-border  rounded-lg flex items-center justify-center gap-3 text-md  h-7 w-7" @click="decrement(n)">
                   <i class="fas fa-minus"></i>
                 </p>
                 <p class=" text-gray-500 text-wrap  flex items-center justify-center text-sm h-7 w-7">
                   {{ this.count[n] }}
                 </p>
                 <p
-                  class=" text-white text-wrap  bg-green-500 rounded-lg flex items-center justify-center gap-3 text-md m-3 h-7 w-7" @click="increment(n)">
+                  class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-md m-3 h-7 w-7" @click="increment(n)">
                   <i class="fas fa-plus"></i>
                 </p>
               </div>
             </div>
           </div>
           </div>
-          <div class="h-[30%] rounded-lg bg-[#C1E1C1]/30 w-full flex flex-col space-y-2 p-5">
+          <div class="h-[30%] rounded-lg bg-border/30 w-full flex flex-col space-y-2 p-5">
             <p class="font-bold"> Detail Payment </p>
             <div class="flex justify-between items-center text-sm px-3">
               <p class="text-gray-500">SubTotal</p>
-              <p class="text-gray-800"> <span class="text-green-500">$</span>500 </p>
+              <p class="text-gray-800"> <span class="text-primary">$</span>500 </p>
             </div>
             <div class="flex justify-between items-center text-sm px-3">
               <p class="text-gray-500">Tax 10%</p>
-              <p class="text-gray-800"> <span class="text-green-500">$</span>50 </p>
+              <p class="text-gray-800"> <span class="text-primary">$</span>50 </p>
             </div>
             <div class="flex justify-between items-center text-sm px-3">
               <p class="text-gray-500">Discount</p>
-              <p class="text-gray-800"> <span class="text-green-500">$</span>50 </p>
+              <p class="text-gray-800"> <span class="text-primary">$</span>50 </p>
             </div>
-            <div class="border-[#C1E1C1] border-dashed  border-b-[1px] py-3 "></div>
+            <div class="border-border border-dashed  border-b-[1px] py-3 "></div>
             <div class="flex justify-between items-center text-sm px-3 pt-3">
               <p class="text-gray-500">Total Payment</p>
-              <p class="text-gray-800"> <span class="text-green-500">$</span>600 </p>
+              <p class="text-gray-800"> <span class="text-primary">$</span>600 </p>
             </div>
           </div>
           <div class="h-[5%] rounded-lg w-full pt-3">
             <p
-              class=" text-white py-2 px-3 text-wrap  bg-green-500 rounded-lg flex items-center justify-center gap-3 text-sm">
+              class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
               Place an Order
             </p>
           </div>

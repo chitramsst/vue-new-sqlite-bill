@@ -7,7 +7,7 @@
             </video>
         </div>
         <div class="flex flex-col h-screen bg-gray-100 w-9/12 p-36 pt-64">
-            <h2 class="text-2xl text-green-700  font-bold mb-6">Sign In</h2>
+            <h2 class="text-2xl text-primary  font-bold mb-6">Sign In</h2>
             <div class=" text-sm mb-4">
                 <input type="text"
                     class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-5 px-3 w-[564px] outline-0"
@@ -22,7 +22,7 @@
             </div>
             <div class=" text-md mb-4">
             <p @click="login"
-              class=" text-white py-5 px-3 text-wrap font-bold bg-green-800 rounded-lg flex items-center justify-center gap-3 text-sm w-[564px] ">
+              class=" text-white py-5 px-3 text-wrap font-bold bg-primary rounded-lg flex items-center justify-center gap-3 text-sm w-[564px] ">
               Login
             </p>
             </div>
