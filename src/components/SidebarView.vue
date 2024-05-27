@@ -16,7 +16,9 @@
             <router-link to="/category">
             <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Category</li>
           </router-link>
+          <router-link to="/product">
             <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Product</li>
+            </router-link>
           </ul>
         </div>
         </div>
