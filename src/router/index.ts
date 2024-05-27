@@ -16,6 +16,13 @@ const router = createRouter({
       //@ts-ignore
       component: () => import('../views/HomeView.vue')
     },
+    ,
+    {
+      path: '/category',
+      name: 'category',
+      //@ts-ignore
+      component: () => import('../views/product/CategoryView.vue')
+    },
     {
       path: '/about',
       name: 'about',
