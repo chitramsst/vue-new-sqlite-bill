@@ -1,41 +1,5 @@
 <template>
-  <div class="flex h-screen">
-    <!-- sidebar -->
-    <div class="w-[100px] bg-sidebar flex justify-start flex-col items-center space-y-6">
-      <p
-        class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10">
-        <i class="fa-brands fa-canadian-maple-leaf"></i>
-      </p>
-      <ul class="mt-5 flex flex-col space-y-5">
-        <li>
-          <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
-            <i class="fa-solid fa-layer-group"></i>
-          </p>
-        </li>
-        <li>
-          <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
-            <i class="fa-regular fa-image"></i>
-          </p>
-        </li>
-        <li>
-          <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
-            <i class="fa-solid fa-arrows-to-dot"></i>
-          </p>
-        </li>
-        <li>
-          <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
-            <i class="fa-solid fa-circle-dollar-to-slot"></i>
-          </p>
-        </li>
-        <li>
-          <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
-            <i class="fa-solid fa-truck-monster"></i>
-          </p>
-        </li>
-      </ul>
-    </div>
-    <!-- End of sidebar -->
-    <div class="w-full ">
+    <div class="w-full h-full">
 
       <!-- header section  -->
       <div class="h-[7%]  shadow-sm  border-b-[0.5px] border-border flex flex-row justify-between p-5 items-center">
@@ -116,9 +80,9 @@
             </p>
           </div>
           <!-- item section -->
-          <div class="h-[93%] p-7 w-full grid grid-cols-4 gap-10 ">
+          <div class="h-[93%] p-7 w-full grid grid-cols-4 gap-8 ">
             <div v-for="n in 8" :key="n"
-              class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 pt-3 max-h-[350px]">
+              class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 py-3 max-h-[350px]">
               <div class="h-6/12">
                 <img
                   src="https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123"
@@ -203,7 +167,6 @@
         <!-- End of body calculation section section  -->
       </div>
     </div>
-  </div>
 </template>
 <script>
 import { useAuthStore } from '@/stores/authStore';
