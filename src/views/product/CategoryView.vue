@@ -12,7 +12,7 @@
                         class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
                         <i class="fas fa-plus"></i> Create Category
                     </p>
-                    <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category"/>
+                    <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category" :isEdit="false"/>
                     <div class="border-l border-border h-7 mt-1 "></div>
                     <p
                         class="text-gray-800 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
@@ -25,92 +25,75 @@
         <div class="h-[90%] w-full">
             <h1 class="text-gray-800 text-xl text-center font-bold mt-10"> Category Management</h1>
             <div class="grid grid-cols-5 gap-20 p-10 text-gray-300 mt-10">
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
+                        <div class="text-white">
                             <i class="fas fa-trash"></i>
                         </div>
-                        <div class="text-yellow-500">
+                        <div class="text-cyan-500" @click="openEditModal">
+                            <i class="fas fa-pencil"></i>
+                        </div>
+                    </div>
+                    <CategoryModal :isVisible="isEditModalVisible" @close="isEditModalVisible = false" title="Edit Category" :isEdit="true"/>
+                </div>
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
+                    <h3> Category 1</h3>
+                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
+                    <div class="flex justify-between item-center px-2 pt-3">
+                        <div class="text-white">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div class="text-cyan-500">
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
+                        <div class="text-white">
                             <i class="fas fa-trash"></i>
                         </div>
-                        <div class="text-yellow-500">
+                        <div class="text-cyan-500">
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
+                        <div class="text-white">
                             <i class="fas fa-trash"></i>
                         </div>
-                        <div class="text-yellow-500">
+                        <div class="text-cyan-500">
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
+                        <div class="text-white">
                             <i class="fas fa-trash"></i>
                         </div>
-                        <div class="text-yellow-500">
+                        <div class="text-cyan-500">
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
+                        <div class="text-white">
                             <i class="fas fa-trash"></i>
                         </div>
-                        <div class="text-yellow-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-yellow-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gray-800 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-red-500">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-yellow-500">
+                        <div class="text-cyan-500">
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
@@ -131,14 +114,21 @@ export default {
     },
     setup() {
         const isModalVisible = ref(false);
+        const isEditModalVisible = ref(false);
 
         const openModal = () => {
             isModalVisible.value = true;
         };
 
+        const openEditModal = () => {
+            isEditModalVisible.value = true;
+        };
+
         return {
             isModalVisible,
+            isEditModalVisible,
             openModal,
+            openEditModal
         };
     },
 };
