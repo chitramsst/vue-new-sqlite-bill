@@ -8,10 +8,11 @@
             </div>
             <div class="flex flex-row space-x-5">
                 <div class="flex flex-row space-x-2">
-                    <p
+                    <p @click="openModal"
                         class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
                         <i class="fas fa-plus"></i> Create Category
                     </p>
+                    <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category"/>
                     <div class="border-l border-border h-7 mt-1 "></div>
                     <p
                         class="text-gray-800 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
@@ -118,3 +119,27 @@
         </div>
     </div>
 </template>
+
+
+<script>
+import { ref } from 'vue';
+import CategoryModal from '../../components/Modals/CategoryModal.vue'
+export default {
+    name: 'App',
+    components: {
+        CategoryModal,
+    },
+    setup() {
+        const isModalVisible = ref(false);
+
+        const openModal = () => {
+            isModalVisible.value = true;
+        };
+
+        return {
+            isModalVisible,
+            openModal,
+        };
+    },
+};
+</script>

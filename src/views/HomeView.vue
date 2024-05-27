@@ -110,7 +110,7 @@
         <div class="h-[65%] w-full pb-5">
           <p class="font-bold pb-5"> Detail Items </p>
           <div class="h-[90%] overflow-y-auto">
-            <div class="pt-3 flex flex-row space-x-2 pb-3" v-for="n in 7" :key="n">
+            <div class="pt-3 flex flex-row space-x-2 pb-3" v-for="n in 2" :key="n">
               <img
                 src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2022/07/essential-props-fstoppers-helenarosephotography-080-edit1.jpg"
                 class="max-h-[100px] w-[100px] rounded-lg resize shadow-xl" />
