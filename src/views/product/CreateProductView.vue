@@ -17,9 +17,9 @@
             </div>
         </div>
         <!--End of header section  -->
-        <div class="h-[90%] w-full p-10">
-            <h1 class="text-gray-800 text-xl text-center font-bold mt-10"> Create Product</h1>
-            <div class="grid grid-cols-3 gap-10  text-gray-300 mt-10">
+        <div class="h-[90%] w-full px-10">
+            <h1 class="text-gray-800 text-xl text-center font-bold mt-2"> Create Product</h1>
+            <div class="grid grid-cols-3 gap-10  text-gray-300 mt-5">
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> Name </h6>
                     <input type="text"
@@ -33,12 +33,14 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                         placeholder="cost price" v-model="cost_price" :class="{ 'border-red-500': v$.cost_price.$error || error }" />
                 </div>
+
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> Selling Price </h6>
                     <input type="number"
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                         placeholder="selling price" v-model="selling_price" :class="{ 'border-red-500': v$.selling_price.$error || error }" />
                 </div>
+                
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> Category </h6>
                     <select 
@@ -120,14 +122,21 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                         placeholder="Warehouse Location" v-model="warehouseLocation" :class="{ 'border-red-500': v$.hsCode.$error || error }" />
                 </div>
-
+                <div class=" text-sm mb-1 text-gray-600">
+                    <h6 class="mb-3"> Staus </h6>
+                    <select 
+                        class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
+                         v-model="status">
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                        </select>
+                </div>
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> Description </h6>
                     <textarea
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0 resize-none"
-                        placeholder="Description" v-model="description"/>
+                        placeholder="Description" v-model="description" rows="5"/>
                 </div>
-                
             </div>
             <div class=" text-md my-4 flex justify-end">
                 <p @click="create"
@@ -167,7 +176,8 @@ export default {
             hsCode: null,
             warehouseLocation: null,
             description:null,
-            expiryDate: moment().format('YYYY-MM-DD')
+            expiryDate: moment().format('YYYY-MM-DD'),
+            status: 1
         }
     },
     mounted() {
