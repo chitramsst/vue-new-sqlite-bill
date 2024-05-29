@@ -1,5 +1,5 @@
 <template>
-   <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50" v-if="isVisible">
+  <div class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50" v-if="isVisible">
     <div class="bg-white rounded-lg p-6 max-w-md">
       <div class="flex justify-between items-center min-w-[300px]">
         <h3 class="text-lg text-gray-700 font-semibold">{{ title }}</h3>
@@ -12,13 +12,14 @@
       <div class="border-b-[0.5px] border-border mt-3 "></div>
       <div class="mt-4">
         <div class=" text-sm">
-        <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[100%] outline-0"
-          placeholder="Name" v-model="name"  :class="{ 'border-red-500' : v$.name.$error }" />
-      </div>
+          <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[100%] outline-0"
+            placeholder="Name" v-model="name" :class="{ 'border-red-500': v$.name.$error }" />
+        </div>
       </div>
       <!-- <div class="border-b-[0.5px] border-border mt-3 "></div> -->
       <div class="mt-6 flex justify-end text-sm">
-        <button @click="closeModal" class="px-4 py-2 border-[0.5px] border-border text-gray-700 rounded-lg mr-4">Close</button>
+        <button @click="closeModal"
+          class="px-4 py-2 border-[0.5px] border-border text-gray-700 rounded-lg mr-4">Close</button>
         <button class="px-4 py-2 bg-primary text-white rounded-lg" @click="save">Save</button>
       </div>
     </div>
@@ -44,53 +45,86 @@ export default {
     },
   },
   setup() {
-        return { v$: useVuelidate() };
-    },
-    data()
-    {
-        return{
-            name : '',
-            is_active : 1,
-        }
-    },
+    return { v$: useVuelidate() };
+  },
+  data() {
+    return {
+      name: '',
+      is_active: 1,
+      editingItem: '',
+      item_id:''
+    }
+  },
   methods: {
     closeModal() {
+      this.resetData()
       this.$emit('close');
     },
-    async save()
-        {
-            const isFormCorrect = await this.v$.$validate();
-            if (!isFormCorrect) {
-                return;
-            }
-            window.ipcRenderer.invoke('database-function',{
-                target : 'create-category',
-                data : {
-                    name : this.name,
-                    is_active : this.is_active,
-                }
-            }).then((response) => {
-                this.$emit('save',{
-                    type : 'create',
-                    item : response.item
-                })
-                // this.$emitter.emit('notify',{
-                //     title : this.$t('Success'),
-                //     subtitle : this.$t('Expense Category has been created'),
-                //     type : 'success'
-                // })
-                this.$emit('close')
-            })
-        },
-    resetData()
-        {
-            this.name = '';
-            this.is_active = 1;
-            this.v$.$reset()
-        },
+    editItem(item) {
+      this.editingItem = item;
+      this.fillData(item)
+    },
+    fillData(item) {
+      this.name = item.dataValues.name;
+      this.is_active = item.dataValues.is_active;
+      this.item_id = item.dataValues.id;
+    },
+    async save() {
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) {
+        return;
+      }
+      if (this.isEdit == true) {
+        window.ipcRenderer.invoke('database-function', {
+          target: 'edit-category',
+          data: {
+            name: this.name,
+            item_id: this.item_id,
+            is_active: this.is_active,
+          }
+        }).then((response) => {
+          this.$emit('save', {
+            type: 'update',
+            item: response.item
+          })
+          // this.$emitter.emit('notify',{
+          //     title : this.$t('Success'),
+          //     subtitle : this.$t('Expense Category has been created'),
+          //     type : 'success'
+          // })
+          this.$emit('close')
+        })
+      }
+      if (this.isEdit == false) {
+        window.ipcRenderer.invoke('database-function', {
+          target: 'create-category',
+          data: {
+            name: this.name,
+            is_active: this.is_active,
+          }
+        }).then((response) => {
+          this.resetData()
+          this.$emit('save', {
+            type: 'create',
+            item: response.item
+          })
+          // this.$emitter.emit('notify',{
+          //     title : this.$t('Success'),
+          //     subtitle : this.$t('Expense Category has been created'),
+          //     type : 'success'
+          // })
+          this.$emit('close')
+        })
+      }
+    },
+    resetData() {
+      this.name = '';
+      this.is_active = 1;
+      this.v$.$reset()
+    },
   },
   validations: {
-        name: { required },
-    },
+    name: { required },
+  },
 };
 </script>

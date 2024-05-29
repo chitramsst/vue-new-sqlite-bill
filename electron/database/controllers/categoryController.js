@@ -31,3 +31,48 @@ exports.create_item = async (data) => {
     };
   };
   
+  exports.edit_item= async (data) => {
+    await Category.update(
+      {
+        name: data.name,
+        is_active: data.is_active,
+      },
+      {
+        where: {
+          id: data.item_id,
+        },
+      }
+    );
+    let category = await Category.findOne({
+      where: {
+        id: data.item_id,
+      },
+    });
+    return {
+      item: category,
+      success: true,
+    };
+  };
+  
+  exports.delete_item = async (data) => {
+    let category = await Category.findOne({
+      where: {
+        id: data.item_id,
+      },
+    });
+    // let expense = await db.Expense.findOne({
+    //   where: {
+    //     expense_category: data.item_id,
+    //   },
+    // });
+    // if (expense) {
+    //   return {
+    //     success: false,
+    //     message: "PREVENT_DELETE",
+    //   };
+    // }
+    await category.destroy();
+    return {
+      success: true,
+    };
+  };
