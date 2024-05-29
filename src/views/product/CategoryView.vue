@@ -4,7 +4,7 @@
         <div class="h-[7%]  shadow-sm  border-b-[0.5px] border-border flex flex-row justify-between p-5 items-center">
             <div class=" text-sm">
                 <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[100%] outline-0"
-                    placeholder="search category" />
+                    placeholder="search category" v-model="search"/>
             </div>
             <div class="flex flex-row space-x-5">
                 <div class="flex flex-row space-x-2">
@@ -13,7 +13,7 @@
                         <i class="fas fa-plus"></i> Create Category
                     </p>
                     <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category"
-                        :isEdit="false" />
+                        :isEdit="false"  @save="handleUpdates"/>
                     <div class="border-l border-border h-7 mt-1 "></div>
                     <p
                         class="text-gray-800 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
@@ -28,7 +28,7 @@
                 <h2 class="text-2xl font-semibold leading-tight mt-10">Categories</h2>
             </div>
             <div class="grid grid-cols-5 gap-10  text-gray-300 mt-10">
-                <div class=" p-3 rounded-lg text-pretty text-center" :class="item.dataValues.is_active==1 ? 'bg-slate-600' : 'bg-slate-400' " v-for="item in items" :key="item.id">
+                <div class=" p-3 rounded-lg text-pretty text-center" :class="item.dataValues.is_active==1 ? 'bg-slate-600' : 'bg-slate-400' " v-for="item in itemResults" :key="item.id">
                     <h3>{{ item.dataValues.name }}</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
@@ -64,10 +64,9 @@ export default{
     {
         return{
             authStore : useAuthStore(),
-            email : '',
-            password : '',
             error : false,
-            items : []
+            items : [],
+            search: ''
         }
     },
     components: {
@@ -107,6 +106,26 @@ export default{
                    this.items = response.items
                 }
             })
+        },
+
+        handleUpdates(e)
+        {
+            if(e.type == 'create')
+            {
+                this.items.unshift(e.item)
+            }
+            else if(e.type == 'update'){
+                let index = this.items.findIndex((x,index) =>  x.dataValues.id == e.item.dataValues.id);
+                if(index != -1)
+                {
+                    this.items[index] = e.item
+                }
+            }
+        },
+    },
+    computed:{
+        itemResults() {
+            return this.items.filter((x) => x.dataValues.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
         }
     },
     validations () {

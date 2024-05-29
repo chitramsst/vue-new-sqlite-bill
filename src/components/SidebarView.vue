@@ -25,7 +25,7 @@
           </ul>
         </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"  :class="open ? 'bg-primary text-white' : 'bg-sidebar text-gray-500'" x-on:click="open = ! open" x-on:click.outside="open = false">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"   x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-solid fa-layer-group"></i>
         </p>
       </li>
@@ -39,7 +39,7 @@
           </ul>
         </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"  :class="open ? 'bg-primary text-white' : 'bg-sidebar text-gray-500'" x-on:click="open = ! open" x-on:click.outside="open = false">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar" x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-regular fa-image"></i>
         </p>
       </li>
@@ -64,7 +64,7 @@
           </ul>
         </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"  :class="open ? 'bg-primary text-white' : 'bg-sidebar text-gray-500'" x-on:click="open = ! open" x-on:click.outside="open = false">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"   x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-solid fa-truck-monster"></i>
         </p>
       </li>

@@ -8,8 +8,10 @@ module.exports = {
         {
             case 'login-user': 
                 return user_controller.login_user(params.data)
-            case 'get-items':
-                return category_controller.get_items(params.data)
+                case 'get-items':
+                    return category_controller.get_items(params.data) 
+                case 'create-category':
+                    return category_controller.create_item(params.data)
          }
         
     })

@@ -50,7 +50,6 @@ async function readySqlite() {
       resolve()
     }
     catch (e) {
-      console.log(e)
       resolve()
     }
   })
