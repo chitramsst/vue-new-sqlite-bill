@@ -12,7 +12,8 @@
                         class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
                         <i class="fas fa-plus"></i> Create Category
                     </p>
-                    <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category" :isEdit="false"/>
+                    <CategoryModal :isVisible="isModalVisible" @close="isModalVisible = false" title="Create Category"
+                        :isEdit="false" />
                     <div class="border-l border-border h-7 mt-1 "></div>
                     <p
                         class="text-gray-800 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
@@ -24,8 +25,8 @@
         <!--End of header section  -->
         <div class="h-[90%] w-full p-10">
             <div>
-                        <h2 class="text-2xl font-semibold leading-tight mt-10">Categories</h2>
-                    </div>
+                <h2 class="text-2xl font-semibold leading-tight mt-10">Categories</h2>
+            </div>
             <div class="grid grid-cols-5 gap-10  text-gray-300 mt-10">
                 <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
@@ -38,7 +39,8 @@
                             <i class="fas fa-pencil"></i>
                         </div>
                     </div>
-                    <CategoryModal :isVisible="isEditModalVisible" @close="isEditModalVisible = false" title="Edit Category" :isEdit="true"/>
+                    <CategoryModal :isVisible="isEditModalVisible" @close="isEditModalVisible = false"
+                        title="Edit Category" :isEdit="true" />
                 </div>
                 <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>

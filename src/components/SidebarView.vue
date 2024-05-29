@@ -68,7 +68,34 @@
           <i class="fa-solid fa-truck-monster"></i>
         </p>
       </li>
+      <li>
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10" @click="logout">
+          <i class="fa-solid fa-sign-out"></i>
+        </p>
+      </li>
     </ul>
   </div>
   <!-- End of sidebar -->
 </template>
+
+<script>
+import { useAuthStore } from '@/stores/authStore';
+export default {
+  data() {
+    return {
+      menuOpen: false,
+      count: new Array(10).fill(1),
+      authStore: useAuthStore()
+    };
+  },
+  created() {
+
+  },
+  methods: {
+    logout() {
+      this.authStore.$reset()
+      this.$router.push({ name: 'login' })
+    }
+  }
+};
+</script>
