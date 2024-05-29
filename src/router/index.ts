@@ -24,6 +24,19 @@ const router = createRouter({
       component: () => import('../views/product/CategoryView.vue')
     },
     {
+      path: '/brand',
+      name: 'brand',
+      //@ts-ignore
+      component: () => import('../views/product/brand/BrandView.vue')
+    },
+    ,
+    {
+      path: '/unit',
+      name: 'unit',
+      //@ts-ignore
+      component: () => import('../views/settings/UnitView.vue')
+    },
+    {
       path: '/product',
       name: 'product',
       //@ts-ignore

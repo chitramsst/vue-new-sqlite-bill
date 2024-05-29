@@ -50,9 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-400 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
+                    <div class="border-b-[0.5px] border-border mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
                         <div class="text-white">
                             <i class="fas fa-trash"></i>
@@ -86,9 +86,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
+                <div class="bg-slate-400 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
+                    <div class="border-b-[0.5px] border-border mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
                         <div class="text-white">
                             <i class="fas fa-trash"></i>
