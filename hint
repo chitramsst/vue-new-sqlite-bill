@@ -3,7 +3,7 @@
 FrontEnd: Vue js
 Backend: Node 
 database: MYSQL
-sequalize
+Node.js with Sequelize and MySQL
 
 
 /Users/chitra/Library/Application Support/vue-bill/database.sqlite

@@ -47,9 +47,9 @@ module.exports.runSeeders = async function () {
         user_type: 1,
       });
     }
-    instance.Category.create({
-      name: "new",
-    });
+    // instance.Category.create({
+    //   name: "new",
+    // });
     return false;
   }
 };

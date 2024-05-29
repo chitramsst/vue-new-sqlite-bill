@@ -28,8 +28,8 @@
                 <h2 class="text-2xl font-semibold leading-tight mt-10">Categories</h2>
             </div>
             <div class="grid grid-cols-5 gap-10  text-gray-300 mt-10">
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
+                <div class=" p-3 rounded-lg text-pretty text-center" :class="item.dataValues.is_active==1 ? 'bg-slate-600' : 'bg-slate-400' " v-for="item in items" :key="item.id">
+                    <h3>{{ item.dataValues.name }}</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
                     <div class="flex justify-between item-center px-2 pt-3">
                         <div class="text-white">
@@ -42,72 +42,99 @@
                     <CategoryModal :isVisible="isEditModalVisible" @close="isEditModalVisible = false"
                         title="Edit Category" :isEdit="true" />
                 </div>
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-white">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-cyan-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-400 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-white">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-cyan-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-white">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-cyan-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-white">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-cyan-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-400 p-3 rounded-lg text-pretty text-center">
-                    <h3> Category 1</h3>
-                    <div class="border-b-[0.5px] border-border mt-3 "></div>
-                    <div class="flex justify-between item-center px-2 pt-3">
-                        <div class="text-white">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="text-cyan-500">
-                            <i class="fas fa-pencil"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </template>
 
 
+
+<script lang="ts">
+import {useAuthStore} from '@/stores/authStore'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
+import { ref } from 'vue';
+import CategoryModal from '../../components/Modals/CategoryModal.vue'
+
+export default{
+    setup () {
+        return { v$: useVuelidate() }
+    },
+    data()
+    {
+        return{
+            authStore : useAuthStore(),
+            email : '',
+            password : '',
+            error : false,
+            items : []
+        }
+    },
+    components: {
+        CategoryModal,
+    },
+    mounted() {
+        this.getItems()
+    },
+    setup() {
+        const isModalVisible = ref(false);
+        const isEditModalVisible = ref(false);
+
+        const openModal = () => {
+            isModalVisible.value = true;
+        };
+
+        const openEditModal = () => {
+            isEditModalVisible.value = true;
+        };
+
+        return {
+            isModalVisible,
+            isEditModalVisible,
+            openModal,
+            openEditModal
+        };
+    },
+    methods:{
+        async getItems()
+        {
+            window.ipcRenderer.invoke('database-function',{target:'get-items'}).then((response) => {
+                if(response.success == false)
+                {
+                    this.error = true;
+                }
+                else{
+                   this.items = response.items
+                }
+            })
+        }
+    },
+    validations () {
+        return {
+            email: { required},
+            password: { required }, 
+        }
+    },
+    watch : {
+        email()
+        {
+            if(this.error)
+            {
+                this.error = false;
+            }
+        },
+        password()
+        {
+            if(this.error)
+            {
+                this.error = false;
+            }
+        }
+    }
+}
+</script>
+
+<!-- 
 <script>
 import { ref } from 'vue';
 import CategoryModal from '../../components/Modals/CategoryModal.vue'
@@ -136,4 +163,4 @@ export default {
         };
     },
 };
-</script>
+</script> -->
