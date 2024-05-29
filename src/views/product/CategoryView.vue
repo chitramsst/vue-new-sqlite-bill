@@ -22,9 +22,11 @@
             </div>
         </div>
         <!--End of header section  -->
-        <div class="h-[90%] w-full">
-            <h1 class="text-gray-800 text-xl text-center font-bold mt-10"> Category Management</h1>
-            <div class="grid grid-cols-5 gap-20 p-10 text-gray-300 mt-10">
+        <div class="h-[90%] w-full p-10">
+            <div>
+                        <h2 class="text-2xl font-semibold leading-tight mt-10">Categories</h2>
+                    </div>
+            <div class="grid grid-cols-5 gap-10  text-gray-300 mt-10">
                 <div class="bg-slate-600 p-3 rounded-lg text-pretty text-center">
                     <h3> Category 1</h3>
                     <div class="border-b-[0.5px] border-border/30 mt-3 "></div>
