@@ -50,6 +50,7 @@ export default{
         }
     },
     created() {
+        alert(JSON.stringify(this.authStore));
         if(this.authStore.isLoggedIn)
         {
             if(this.authStore.user?.user_type == 1)
@@ -71,6 +72,7 @@ export default{
                     this.error = true;
                 }
                 else{
+                    alert(JSON.stringify(response.user))
                     this.authStore.user = response.user;
                     this.$router.push({
                         name : 'home'

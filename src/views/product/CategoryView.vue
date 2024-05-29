@@ -133,34 +133,3 @@ export default{
     }
 }
 </script>
-
-<!-- 
-<script>
-import { ref } from 'vue';
-import CategoryModal from '../../components/Modals/CategoryModal.vue'
-export default {
-    name: 'App',
-    components: {
-        CategoryModal,
-    },
-    setup() {
-        const isModalVisible = ref(false);
-        const isEditModalVisible = ref(false);
-
-        const openModal = () => {
-            isModalVisible.value = true;
-        };
-
-        const openEditModal = () => {
-            isEditModalVisible.value = true;
-        };
-
-        return {
-            isModalVisible,
-            isEditModalVisible,
-            openModal,
-            openEditModal
-        };
-    },
-};
-</script> -->

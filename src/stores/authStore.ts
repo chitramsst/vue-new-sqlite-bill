@@ -1,14 +1,12 @@
-import type { User,Settings,DbResponseCompanySettings, MasterSettings } from '@/types/types';
 import { defineStore } from 'pinia'
-export interface WholeSettings extends Settings,MasterSettings{}
 
 export const useAuthStore = defineStore('authStore', {
     // arrow function recommended for full type inference
     state: () => {
       return {
-        user : null as User | null,
-        settings : null  as null | WholeSettings,
-        language : 'en',
+        user : null,
+      //  settings : null  as null | WholeSettings,
+      //  language : 'en',
       }
     },
     getters:{

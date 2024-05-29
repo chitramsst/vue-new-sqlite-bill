@@ -4,7 +4,10 @@ const { Op } = require("sequelize");
 exports.get_items = async (data) => {
   
    
-    let categories = await Category.findAll()
+    let categories = await Category.findAll({order: [
+        ['createdAt', 'DESC']
+    ]
+})
     console.log(categories)
     // if(categories == null)
     // {

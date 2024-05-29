@@ -5,6 +5,7 @@ Backend: Node
 database: MYSQL
 Node.js with Sequelize and MySQL
 
+npm i pinia-plugin-persistedstate
 
 /Users/chitra/Library/Application Support/vue-bill/database.sqlite
 
