@@ -135,6 +135,8 @@ export default {
         deleteItem(item) {
             this.$emitter.emit('show-delete-modal', {
                 message: 'Do you want to delete selected category?',
+                title: 'Confirm Delete',
+                btnText: 'Delete',
                 callback: (e: 'CONFIRM' | 'CLOSE') => {
                     if (e == 'CONFIRM') {
                         window.ipcRenderer.invoke('database-function', {
