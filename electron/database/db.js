@@ -3,17 +3,24 @@ let moment = require("moment");
 module.exports = function () {
   const { Sequelize, DataTypes, Model } = require("sequelize");
   var path = require("path");
-  let sequelize = new Sequelize("database", "username", "password", {
-    dialect: "sqlite",
-    logging: false,
-    storage: path.join(
-      global.share.app.getPath("userData"),
-      "/database.sqlite"
-    ),
+  // let sequelize = new Sequelize("database", "username", "password", {
+  //   dialect: "sqlite",
+  //   logging: false,
+  //   storage: path.join(
+  //     global.share.app.getPath("userData"),
+  //     "/database.sqlite"
+  //   ),
+  // });
+
+  const sequelize = new Sequelize('vue_bill', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql'
   });
+
 
   let db = {};
   db.User = require("./models/User")(sequelize, Sequelize);
+  db.Category = require("./models/Category")(sequelize, Sequelize);
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;
@@ -40,6 +47,9 @@ module.exports.runSeeders = async function () {
         user_type: 1,
       });
     }
+    instance.Category.create({
+      name: "new",
+    });
     return false;
   }
 };
