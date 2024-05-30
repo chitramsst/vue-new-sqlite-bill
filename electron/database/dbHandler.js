@@ -2,6 +2,7 @@ const user_controller = require("./controllers/userController");
 const category_controller = require("./controllers/categoryController");
 const brand_controller = require("./controllers/brandController");
 const unit_controller = require("./controllers/unitController");
+const product_controller = require("./controllers/productController");
 
 module.exports = {
   dbHandler: global.share.ipcMain.handle(
@@ -46,6 +47,21 @@ module.exports = {
           return unit_controller.delete_item(params.data);
         /* end brands */
 
+         /* products */
+        case "get-product-create-initial-items":
+        return product_controller.get_product_create_initial_items(params.data);
+        case "get-products":
+        return product_controller.get_items(params.data);
+        case "create-product":
+          return product_controller.create_item(params.data);
+        case "edit-product":
+          return product_controller.edit_item(params.data);
+        case "delete-product":
+          return product_controller.delete_item(params.data);
+        /* end brands */
+
+
+        
       }
     }
   ),

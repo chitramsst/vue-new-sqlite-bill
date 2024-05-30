@@ -121,3 +121,126 @@
         </div>
     </div>
 </template>
+
+
+<script lang="ts">
+import { useAuthStore } from '@/stores/authStore'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
+import { ref } from 'vue';
+import CategoryModal from '../../components/Modals/CategoryModal.vue'
+
+export default {
+    setup() {
+        return { v$: useVuelidate() }
+    },
+    data() {
+        return {
+            authStore: useAuthStore(),
+            error: false,
+            items: [],
+            search: ''
+        }
+    },
+    components: {
+        CategoryModal,
+    },
+    mounted() {
+        this.getItems()
+    },
+    setup() {
+        const isModalVisible = ref(false);
+        const isEditModalVisible = ref(false);
+
+        const openModal = () => {
+            isModalVisible.value = true;
+        };
+
+        const openEditModal = () => {
+            isEditModalVisible.value = true;
+        };
+
+        return {
+            isModalVisible,
+            isEditModalVisible,
+            openModal,
+            openEditModal
+        };
+    },
+    methods: {
+        async getItems() {
+            window.ipcRenderer.invoke('database-function', { target: 'get-categories' }).then((response) => {
+                if (response.success == false) {
+                    this.error = true;
+                }
+                else {
+                    this.items = response.items
+                }
+            })
+        },
+        /* set the item for edit */
+        editItemInitiate(item) {
+            (this.$refs.editmodal as any).editItem(item)
+            this.isEditModalVisible = true
+            // this.$nextTick(() => {
+            //     this.$refs.editmodal.editItem(item);
+            // });
+
+            // (this.$refs.editmodal as any).editItem(item)
+
+        },
+
+        handleUpdates(e) {
+            if (e.type == 'create') {
+                this.items.unshift(e.item)
+            }
+            else if (e.type == 'update') {
+                let index = this.items.findIndex((x, index) => x.dataValues.id == e.item.dataValues.id);
+                if (index != -1) {
+                    this.items[index] = e.item
+                }
+            }
+        },
+
+        deleteItem(item) {
+            this.$emitter.emit('show-delete-modal', {
+                message: 'Do you want to delete selected category?',
+                title: 'Confirm Delete',
+                btnText: 'Delete',
+                callback: (e: 'CONFIRM' | 'CLOSE') => {
+                    if (e == 'CONFIRM') {
+                        window.ipcRenderer.invoke('database-function', {
+                            target: 'delete-category',
+                            data: {
+                                item_id: item.dataValues.id
+                            }
+                        }).then((response) => {
+                            // if(response.success == false)
+                            // {
+                            //     this.$emitter.emit('notify',{
+                            //         title : 'Delete Failed',
+                            //         subtitle : this.$t('Expense Category cannot be deleted as its used in a expense.'),
+                            //         type : 'error'
+                            //     })
+                            //     return;
+                            // }
+                            let index = this.items.findIndex((x, index) => x.dataValues.id == item.dataValues.id);
+                            this.items.splice(index, 1)
+                            // this.$emitter.emit('notify', {
+                            //     title: 'Delete Success',
+                            //     subtitle: 'Category has been deleted',
+                            //     type: 'success'
+                            // })
+                        });
+                    }
+                }
+            })
+        },
+    },
+    computed: {
+        itemResults() {
+            return this.items.filter((x) => x.dataValues.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
+        }
+    }
+}
+</script>

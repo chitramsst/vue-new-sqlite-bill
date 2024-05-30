@@ -47,7 +47,7 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                         placeholder="price" v-model="category" :class="{ 'border-red-500': v$.category.$error || error }" >
                         <option value=null>Choose Category</option>
-                        <option value="1">New</option>
+                        <option :value="category.dataValues.id" v-for="category in categories" :key="'category.dataValues.id'">{{category.dataValues.name}}</option>
                         </select>
                 </div>
                 <div class=" text-sm mb-1 text-gray-600">
@@ -56,7 +56,7 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                         v-model="brand" :class="{ 'border-red-500': v$.brand.$error || error }" >
                         <option value=null>Choose Brand</option>
-                        <option value="1">New</option>
+                        <option :value="brand.dataValues.id" v-for="brand in brands" :key="'category.dataValues.id'">{{brand.dataValues.name}}</option>
                         </select>
                 </div>
                 <div class=" text-sm mb-1 text-gray-600">
@@ -92,7 +92,7 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                          v-model="unit" :class="{ 'border-red-500': v$.unit.$error || error }" >
                         <option value=null>Choose Unit</option>
-                        <option value="1">New Supplier</option>
+                        <option :value="unit.dataValues.id" v-for="unit in units" :key="'category.dataValues.id'">{{unit.dataValues.name}} [{{unit.dataValues.full_name}}]</option>
                         </select>
                 </div>
                 <div class=" text-sm mb-1 text-gray-600">
@@ -177,13 +177,29 @@ export default {
             warehouseLocation: null,
             description:null,
             expiryDate: moment().format('YYYY-MM-DD'),
-            status: 1
+            status: 1,
+            categories: [],
+            units: [],
+            brands: []
         }
     },
     mounted() {
+        this.getProductCreateInitialItems();
        // this.expiryDate = moment().format('YYYY-MM-DD').toDate();
   },
     methods: {
+        async getProductCreateInitialItems() {
+            window.ipcRenderer.invoke('database-function', { target: 'get-product-create-initial-items'}).then((response) => {
+                if (response.success == false) {
+                    this.error = true;
+                }
+                else {
+                  this.categories = response.categories;
+                  this.brands = response.brands;
+                  this.units = response.units;
+                }
+            })
+        },
         async create() {
             const isFormCorrect = await this.v$.$validate()
             if (!isFormCorrect) {
