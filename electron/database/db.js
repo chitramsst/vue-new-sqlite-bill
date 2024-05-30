@@ -21,6 +21,8 @@ module.exports = function () {
   let db = {};
   db.User = require("./models/User")(sequelize, Sequelize);
   db.Category = require("./models/Category")(sequelize, Sequelize);
+  db.Brand = require("./models/Brand")(sequelize, Sequelize);
+  db.Unit = require("./models/Unit")(sequelize, Sequelize);
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;

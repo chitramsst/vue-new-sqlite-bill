@@ -11,11 +11,9 @@
         </button>
       </div>
       <div class="border-b-[0.5px] border-border mt-3 "></div>
-        <div class="flex items-center justify-center w-full pt-2 flex-col">
-                    <!-- <div class="text-2xl font-medium">Are you sure</div> -->
-                    <div class="mt-3  text-gray-800">{{message}}</div>
+        <div class="w-full pt-2 flex-col">
+                    <div class="mt-3  text-gray-500 leading-tight">{{message}}</div>
                 </div>
-      <!-- <div class="border-b-[0.5px] border-border mt-3 "></div> -->
       <div class="mt-6 flex justify-end text-sm">
         <button 
           class="px-4 py-2 border-[0.5px] border-border text-gray-700 rounded-lg mr-4" @click="callback('EXIT')">Cancel</button>

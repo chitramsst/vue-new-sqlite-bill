@@ -99,7 +99,7 @@ export default {
     },
     methods: {
         async getItems() {
-            window.ipcRenderer.invoke('database-function', { target: 'get-items' }).then((response) => {
+            window.ipcRenderer.invoke('database-function', { target: 'get-categories' }).then((response) => {
                 if (response.success == false) {
                     this.error = true;
                 }
@@ -170,24 +170,6 @@ export default {
     computed: {
         itemResults() {
             return this.items.filter((x) => x.dataValues.name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
-        }
-    },
-    validations() {
-        return {
-            email: { required },
-            password: { required },
-        }
-    },
-    watch: {
-        email() {
-            if (this.error) {
-                this.error = false;
-            }
-        },
-        password() {
-            if (this.error) {
-                this.error = false;
-            }
         }
     }
 }
