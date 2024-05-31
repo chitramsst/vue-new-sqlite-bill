@@ -16,7 +16,7 @@ exports.get_items = async (data) => {
 /* create item */
 exports.create_item = async (data) => {
     let brand = await Supplier.create({
-        supplier_id: data.supplier_id,
+        supplier_code: data.supplier_code,
         company_name: data.company_name,
         supplier_type: data.supplier_type,
         supplier_category: data.supplier_category,

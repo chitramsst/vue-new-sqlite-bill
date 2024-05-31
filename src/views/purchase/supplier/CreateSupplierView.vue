@@ -24,8 +24,8 @@
                     <h6 class="mb-3"> Supplier Id <span class="text-red-700">*</span></h6>
                     <input type="text"
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
-                        placeholder="Supplier code" v-model="supplier_id"
-                        :class="{ 'border-red-500': v$.supplier_id.$error || error }" />
+                        placeholder="Supplier code" v-model="supplier_code"
+                        :class="{ 'border-red-500': v$.supplier_code.$error || error }" />
                 </div>
 
                 <div class=" text-sm mb-1 text-gray-600">
@@ -184,7 +184,7 @@ export default {
     data() {
         return {
             authStore: useAuthStore(),
-            supplier_id: null,
+            supplier_code: null,
             company_name: null,
             supplier_type: null,
             error: false,
@@ -213,7 +213,7 @@ export default {
             if (!isFormCorrect) {
                 return
             }
-            window.ipcRenderer.invoke('database-function', { target: 'create-supplier', data: { supplier_id: this.supplier_id,
+            window.ipcRenderer.invoke('database-function', { target: 'create-supplier', data: { supplier_code: this.supplier_code,
             company_name: this.company_name,
             supplier_type: this.supplier_type,
             supplier_category: this.supplier_category,
@@ -243,7 +243,7 @@ export default {
     },
     validations() {
         return {
-            supplier_id: { required },
+            supplier_code: { required },
             company_name: { required },
             supplier_type: { required },
             supplier_category: { required },
@@ -255,7 +255,7 @@ export default {
         }
     },
     watch: {
-        supplier_id() {
+        supplier_code() {
             if (this.error) {
                 this.error = false;
             }

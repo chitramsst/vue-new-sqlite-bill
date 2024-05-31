@@ -66,9 +66,9 @@
                                     <tr>
                                         <td class="px-5 py-5 border-b border-slate-200 bg-white text-sm">
                                             <div class="flex">
-                                                <div class="flex-shrink-0 w-10 h-10">
+                                                <div class="flex-shrink-0 w-12 h-12">
                                                     <img class="w-full h-full rounded-full"
-                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                                                        src="../../../assets/image/user_empty_1.png"
                                                         alt="" />
                                                 </div>
                                                 <div class="ml-3">

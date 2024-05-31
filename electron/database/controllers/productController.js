@@ -18,6 +18,7 @@ exports.get_items = async (data) => {
 
 /* get needed items for product creation */
 exports.get_product_create_initial_items = async (data) => {
+  let product_data = await generateProductCode();
   let categories = await Category.findAll({
     order: [["createdAt", "DESC"]],
     where: {
@@ -48,11 +49,15 @@ exports.get_product_create_initial_items = async (data) => {
     units: units,
     suppliers: suppliers,
     success: true,
+    product_code: product_data.product_code
   };
 };
 
 /* create item */
 exports.create_item = async (data) => {
+
+  let product_data = await generateProductCode();
+
   let product = await Product.create({
     name: data.name,
     selling_price: data.selling_price,
@@ -64,7 +69,7 @@ exports.create_item = async (data) => {
     quantity: data.quantity,
     reOrderLevel:data.reOrderLevel,
     unit:data.unit,
-    productCode: data.productCode,
+    product_code: product_data.product_code,
     hsCode: data.hsCode,
     warehouseLocation: data.warehouseLocation,
     description:data.description,
@@ -122,3 +127,37 @@ exports.delete_item = async (data) => {
     success: true,
   };
 };
+
+
+
+
+async function generateProductCode() {
+  // let settings = await db.MasterSetting.findAll()
+  // let array  = {};
+  // settings.forEach((item) => {
+  //     array[item.dataValues.title] = item.dataValues.value;
+  // })
+  // let prefix = array['invoice_prefix'] ? array['invoice_prefix'] : null;
+  let prefix = "PR";
+  let lastProduct = await Product.findOne({
+    order: [["createdAt", "DESC"]],
+  });
+
+  if (lastProduct) {
+    if (prefix) {
+      return {
+        prefix,
+        product_code: parseInt(lastProduct.product_code) + 1,
+      };
+    } else {
+      return {
+        prefix: null,
+        product_code: parseInt(lastProduct.product_code) + 1,
+      };
+    }
+  }
+  return {
+    prefix,
+    product_code: 1,
+  };
+}

@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const Supplier = sequelize.define('Supplier', {
-        supplier_id: {
+        supplier_code: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
         },
         company_name: {
             type: DataTypes.STRING,

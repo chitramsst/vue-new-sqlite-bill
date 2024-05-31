@@ -103,8 +103,8 @@
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> Product Code / SKU <span class="text-red-700">*</span></h6>
                     <input type="text"
-                        class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
-                        placeholder="Product Code" v-model="productCode" :class="{ 'border-red-500': v$.productCode.$error || error }" />
+                        class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0" readonly
+                        placeholder="Product Code" v-model="product_code" :class="{ 'border-red-500': v$.product_code.$error || error }" />
                 </div>
                 <div class=" text-sm mb-1 text-gray-600">
                     <h6 class="mb-3"> HSN code </h6>
@@ -168,7 +168,7 @@ export default {
             quantity: null,
             reOrderLevel:null,
             unit:null,
-            productCode: null,
+            product_code: null,
             hsCode: null,
             warehouseLocation: null,
             description:null,
@@ -195,6 +195,7 @@ export default {
                   this.brands = response.brands;
                   this.units = response.units;
                   this.suppliers = response.suppliers;
+                  this.product_code = response.product_code;
                 }
             })
         },
@@ -214,7 +215,7 @@ export default {
             quantity: this.quantity,
             reOrderLevel:this.reOrderLevel,
             unit:this.unit,
-            productCode: this.productCode,
+            product_code: this.product_code,
             hsCode: this.hsCode,
             warehouseLocation: this.warehouseLocation,
             description:this.description,
@@ -243,7 +244,7 @@ export default {
             quantity: {required},
             tax_rate: {required},
             unit: {required},
-            productCode: {required}
+            product_code: {required}
         }
     },
     watch: {
@@ -288,7 +289,7 @@ export default {
             }
         },
        
-        productCode() {
+        product_code() {
             if (this.error) {
                 this.error = false;
             }
