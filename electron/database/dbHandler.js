@@ -3,6 +3,7 @@ const category_controller = require("./controllers/categoryController");
 const brand_controller = require("./controllers/brandController");
 const unit_controller = require("./controllers/unitController");
 const product_controller = require("./controllers/productController");
+const supplier_controler = require('./controllers/supplierController')
 
 module.exports = {
   dbHandler: global.share.ipcMain.handle(
@@ -60,7 +61,16 @@ module.exports = {
           return product_controller.delete_item(params.data);
         /* end brands */
 
-
+       /* suppliers */
+       case "get-suppliers":
+        return supplier_controler.get_items(params.data);
+      case "create-supplier":
+        return supplier_controler.create_item(params.data);
+      case "edit-supplier":
+        return supplier_controler.edit_item(params.data);
+      case "delete-supplier":
+        return supplier_controler.delete_item(params.data);
+      /* end suppliers */
         
       }
     }

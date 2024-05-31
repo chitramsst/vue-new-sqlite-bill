@@ -23,6 +23,8 @@ module.exports = function () {
   db.Category = require("./models/Category")(sequelize, Sequelize);
   db.Brand = require("./models/Brand")(sequelize, Sequelize);
   db.Unit = require("./models/Unit")(sequelize, Sequelize);
+  db.Supplier = require("./models/Supplier")(sequelize, Sequelize);
+  db.Product = require("./models/Product")(sequelize, Sequelize);
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;

@@ -3,7 +3,9 @@ const Product = db.Product;
 const Category = db.Category;
 const Unit = db.Unit;
 const Brand = db.Brand;
+const Supplier = db.Supplier
 const { Op } = require("sequelize");
+const moment = require('moment')
 
 /* fetch item */
 exports.get_items = async (data) => {
@@ -34,10 +36,17 @@ exports.get_product_create_initial_items = async (data) => {
       is_active: 1,
     },
   });
+  let suppliers = await Supplier.findAll({
+    order: [["createdAt", "DESC"]],
+    where: {
+      is_active: 1,
+    },
+  });
   return {
     categories: categories,
     brands: brands,
     units: units,
+    suppliers: suppliers,
     success: true,
   };
 };
@@ -46,7 +55,21 @@ exports.get_product_create_initial_items = async (data) => {
 exports.create_item = async (data) => {
   let product = await Product.create({
     name: data.name,
-    is_active: data.is_active,
+    selling_price: data.selling_price,
+    cost_price: data.cost_price,
+    category: data.category,
+    brand: data.brand,
+    supplier: data.supplier,
+    tax_rate: data.tax_rate,
+    quantity: data.quantity,
+    reOrderLevel:data.reOrderLevel,
+    unit:data.unit,
+    productCode: data.productCode,
+    hsCode: data.hsCode,
+    warehouseLocation: data.warehouseLocation,
+    description:data.description,
+    expiry_date: moment(data.expiry_date).toDate(),
+    is_active: this.is_active, 
   });
   return {
     item: product,
