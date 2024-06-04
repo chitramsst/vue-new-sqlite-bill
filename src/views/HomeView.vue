@@ -53,7 +53,7 @@
       <div class="w-9/12 border-border  shadow-sm border-r-[0.5px] h-full ">
         <!-- category section  -->
         <div class="h-[7%]  shadow-sm  border-b-[0.5px] flex items-center p-7 space-x-12">
-          <p
+          <p @click="this.selected_category = ''"
             class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
             <i class="fas fa-icicles" aria-hidden="true"></i> All Categories
           </p>
