@@ -97,7 +97,7 @@
                         class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
                          v-model="unit" :class="{ 'border-red-500': v$.unit.$error || error }" >
                         <option value=null>Choose Unit</option>
-                        <option :value="unit.dataValues.id" v-for="unit in units" :key="'category.dataValues.id'">{{unit.dataValues.name}} [{{unit.dataValues.full_name}}]</option>
+                        <option :value="unit.dataValues.id" v-for="unit in units" :key="'unit.dataValues.id'">{{unit.dataValues.name}} [{{unit.dataValues.full_name}}]</option>
                         </select>
                 </div>
                 <div class=" text-sm mb-1 text-gray-600">

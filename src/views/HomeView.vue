@@ -28,8 +28,8 @@
             <img src="https://via.placeholder.com/50" alt="Avatar"
               class="w-10 h-10 rounded-full border border-gray-300" />
             <div>
-              <p class="font-bold text-xs">John Doe</p>
-              <p class="text-xs text-gray-400">Member</p>
+              <p class="font-bold text-xs">{{ authStore.user.name }}</p>
+              <p class="text-xs text-gray-400">{{ authStore.user.user_type == 1 ? 'admin' : 'member' }}</p>
             </div>
             <div
               class="relative inline-block text-left text-gray-500 text-wrap  items-center justify-center gap-3 text-sm font-semibold">
@@ -57,7 +57,13 @@
             class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
             <i class="fas fa-icicles" aria-hidden="true"></i> All Categories
           </p>
-          <p
+          <div v-for="category in categories" :key="category.dataValues.id">
+            <p @click="this.selected_category = category.dataValues.id"
+              class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
+              <i class="fas fa-leaf"></i> {{ category.dataValues.name }}
+            </p>
+          </div>
+          <!-- <p
             class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
             <i class="fas fa-leaf"></i> Artificial Plants
           </p>
@@ -76,11 +82,11 @@
           <p
             class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
             <i class="fas fa-clover"></i> Wall Accessories
-          </p>
+          </p> -->
         </div>
         <!-- item section -->
         <div class="h-[93%] p-7 w-full grid grid-cols-4 gap-8 ">
-          <div v-for="n in 8" :key="n"
+          <div v-for="item in itemResults" :key="item.dataValues.id"
             class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 py-3 max-h-[350px]">
             <div class="h-6/12">
               <img
@@ -88,13 +94,13 @@
                 class="min-h-[180px] max-h-[280px] w-[300px] rounded-lg resize shadow-xl" />
             </div>
             <div class="pt-2 h-2/12">
-              <p class=" text-sm"> Whity Giant Plants</p>
-              <p class="text-xs text-gray-400"> Artificial potted, indoor/outdoor Whitley Giant, 9cm</p>
+              <p class=" text-sm"> {{ item.dataValues.name }}</p>
+              <p class="text-xs text-gray-400"> {{ item.dataValues.description ? item.dataValues.description : '-' }}</p>
             </div>
             <div class="flex justify-between items-center h-1/12">
-              <p class="font-bold text-xs text-primary"> $50 </p>
+              <p class="font-bold text-xs text-primary"> ${{ item.dataValues.selling_price }} </p>
               <p class="text-xs text-gray-400 border border-border/20 bg-border/20 px-3 py-1 rounded-full">
-                53 items</p>
+                {{ item.dataValues.quantity }} items</p>
             </div>
             <div class="pt-2 h-2/12">
               <p class="  py-2 px-3 text-wrap border border-border rounded-lg flex items-center justify-center text-xs">
@@ -173,11 +179,18 @@ export default {
     return {
       menuOpen: false,
       count: new Array(10).fill(1),
-      authStore: useAuthStore()
+      authStore: useAuthStore(),
+      categories: [],
+      suppliers: [],
+      units: [],
+      brands: [],
+      order_code: "",
+      selected_category: "",
+      products: ""
     };
   },
-  created() {
-
+  mounted() {
+    this.getProductCreateInitialItems();
   },
   methods: {
     toggleMenu() {
@@ -199,6 +212,36 @@ export default {
     logout() {
       this.authStore.$reset()
       this.$router.push({ name: 'login' })
+    },
+    async getProductCreateInitialItems() {
+      window.ipcRenderer.invoke('database-function', { target: 'get-pos-create-initial-items' }).then((response) => {
+        if (response.success == false) {
+          this.error = true;
+        }
+        else {
+          this.categories = response.categories;
+          this.brands = response.brands;
+          this.units = response.units;
+          this.suppliers = response.suppliers;
+          this.order_code = response.order_code;
+          this.products = response.products;
+        }
+      })
+    },
+    async create() {
+      const isFormCorrect = await this.v$.$validate()
+      if (!isFormCorrect) {
+        return
+      }
+    }
+  },
+  computed: {
+    itemResults() {
+      if (typeof this.selected_category === 'number' && !isNaN(this.selected_category)) {
+        return this.products.filter((x) => x.dataValues.category === this.selected_category);
+      } else {
+        return this.products;
+      }
     }
   }
 };

@@ -4,6 +4,7 @@ const brand_controller = require("./controllers/brandController");
 const unit_controller = require("./controllers/unitController");
 const product_controller = require("./controllers/productController");
 const supplier_controler = require('./controllers/supplierController')
+const pos_controller = require("./controllers/posController");
 
 module.exports = {
   dbHandler: global.share.ipcMain.handle(
@@ -71,6 +72,14 @@ module.exports = {
       case "delete-supplier":
         return supplier_controler.delete_item(params.data);
       /* end suppliers */
+
+
+       /* pos */
+      case "get-pos-create-initial-items":
+        return pos_controller.get_pos_create_initial_items(params.data);
+
+  
+        /* end pos */
         
       }
     }
