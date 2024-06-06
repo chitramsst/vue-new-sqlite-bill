@@ -87,7 +87,8 @@
         <!-- item section -->
         <div class="h-[93%] p-7 w-full grid grid-cols-4 gap-8 ">
           <div v-for="item in itemResults" :key="item.dataValues.id"
-            class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 py-3 max-h-[350px]">
+            class="flex flex-col space-y-1 border-[0.5px] border-border rounded-lg px-3 py-3 max-h-[350px]"
+            @click="chooseProduct(item)">
             <div class="h-6/12">
               <img
                 src="https://cdn.shopify.com/s/files/1/2303/2711/files/2_e822dae0-14df-4cb8-b145-ea4dc0966b34.jpg?v=1617059123"
@@ -95,7 +96,8 @@
             </div>
             <div class="pt-2 h-2/12">
               <p class=" text-sm"> {{ item.dataValues.name }}</p>
-              <p class="text-xs text-gray-400"> {{ item.dataValues.description ? item.dataValues.description : '-' }}</p>
+              <p class="text-xs text-gray-400"> {{ item.dataValues.description ? item.dataValues.description : '-' }}
+              </p>
             </div>
             <div class="flex justify-between items-center h-1/12">
               <p class="font-bold text-xs text-primary"> ${{ item.dataValues.selling_price }} </p>
@@ -116,25 +118,25 @@
         <div class="h-[65%] w-full pb-5">
           <p class="font-bold pb-5"> Detail Items </p>
           <div class="h-[90%] overflow-y-auto">
-            <div class="pt-3 flex flex-row space-x-2 pb-3" v-for="n in 2" :key="n">
+            <div class="pt-3 flex flex-row space-x-2 pb-3" v-for="cart_item in cartItems" :key="cart_item.id">
               <img
                 src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2022/07/essential-props-fstoppers-helenarosephotography-080-edit1.jpg"
                 class="max-h-[100px] w-[100px] rounded-lg resize shadow-xl" />
               <div class="flex flex-col space-y-2 w-2/4">
-                <p class=" text-sm"> Whity Giant Plants</p>
-                <p class="text-xs text-gray-400"> Artificial potted, indoor/outdoor Whitley Giant, 9cm</p>
-                <p class="font-bold text-xs text-primary"> $50 </p>
+                <p class=" text-sm"> {{ cart_item.name }}</p>
+                <p class="text-xs text-gray-400"> {{ cart_item.description ? cart_item.description : '-' }}</p>
+                <p class="font-bold text-xs text-primary"> ${{ cart_item.selling_price }} </p>
               </div>
               <div class="flex flex-row space-x-1 justify-center items-center w-1/4">
                 <p class=" text-gray-500 text-wrap border-[0.5px]  border-border  rounded-lg flex items-center justify-center gap-3 text-md  h-7 w-7"
-                  @click="decrement(n)">
+                  @click="decrement(cart_item.id)">
                   <i class="fas fa-minus"></i>
                 </p>
                 <p class=" text-gray-500 text-wrap  flex items-center justify-center text-sm h-7 w-7">
-                  {{ this.count[n] }}
+                  {{ cart_item.quantity }}
                 </p>
                 <p class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-md m-3 h-7 w-7"
-                  @click="increment(n)">
+                  @click="increment(cart_item.id)">
                   <i class="fas fa-plus"></i>
                 </p>
               </div>
@@ -186,27 +188,61 @@ export default {
       brands: [],
       order_code: "",
       selected_category: "",
-      products: ""
+      products: "",
+      cartItems: [],
+      total_quantity : 0,
+      sub_total : 0,
+      tax_total : 0,
+      net_total : 0
     };
   },
   mounted() {
     this.getProductCreateInitialItems();
   },
   methods: {
+    chooseProduct(product) {
+      const existingItem = this.cartItems.find(item => item.id === product.dataValues.id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        this.cartItems.push({ ...product.dataValues, quantity: 1 });
+      }
+      this.storeToLocalStorage();
+      this.calculateDetail();
+    },
+    findItem(item) {
+      let index = this.cartItems.findIndex((x) => x.dataValues.id == item.dataValues.id && x.type == 'PRODUCT')
+      if (index != -1) {
+        return this.cartItems[index]
+      }
+      return false;
+    },
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
     },
-    increment(n) {
-      this.count[n] = this.count[n] + 1
+    increment(id) {
+      let index = this.cartItems.findIndex((x) => x.id == id)
+      if (index != -1) {
+        this.cartItems[index].quantity = this.cartItems[index].quantity + 1
+      }
+      this.storeToLocalStorage();
     },
-    decrement(n) {
-      if (this.count[n] == 1) {
-        this.count[n] = 1;
-        return;
+    decrement(id) {
+      let index = this.cartItems.findIndex((x) => x.id == id)
+      if (index != -1) {
+        if (this.cartItems[index].quantity > 1) {
+          this.cartItems[index].quantity = this.cartItems[index].quantity - 1
+        } else {
+          this.cartItems.splice(index, 1);
+        }
       }
-      if (this.count[n] > 1) {
-        this.count[n] = this.count[n] - 1;
-      }
+      this.storeToLocalStorage();
+    },
+    storeToLocalStorage(){
+      const cartItemsJSON = JSON.stringify(this.cartItems);
+      localStorage.setItem('cartItems', cartItemsJSON);
+    },
+    calculateDetail(){
 
     },
     logout() {

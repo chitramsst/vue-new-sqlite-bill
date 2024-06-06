@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true,
         },
+        supplier_prefix: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         company_name: {
             type: DataTypes.STRING,
             allowNull: false
