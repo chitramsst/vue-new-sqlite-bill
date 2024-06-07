@@ -81,6 +81,7 @@ ipcMain.handle('print-window', async (event, params) => {
   }
 
   await printWindow.webContents.on('did-finish-load', async () => {
+    console.log("printtttttt")
     printWindow.webContents.send('print-this', params)
     await delay(500)
     printWindow.webContents.print({
@@ -95,3 +96,6 @@ ipcMain.handle('print-window', async (event, params) => {
 })
 
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
