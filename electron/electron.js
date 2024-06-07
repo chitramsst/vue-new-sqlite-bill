@@ -60,3 +60,38 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+ipcMain.handle('print-window', async (event, params) => {
+  let printWindow = new BrowserWindow({
+    show: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+    },
+  });
+
+  if (params.type && params.type == 'old') {
+    printWindow.loadFile(path.join(__dirname, '/html/print-old.html'));
+  }
+  else if (params.type && params.type == 'thermal') {
+    printWindow.loadFile(path.join(__dirname, '/html/print-thermal.html'));
+  }
+  else {
+    printWindow.loadFile(path.join(__dirname, '/html/print.html'));
+  }
+
+  await printWindow.webContents.on('did-finish-load', async () => {
+    printWindow.webContents.send('print-this', params)
+    await delay(500)
+    printWindow.webContents.print({
+      silent: true,
+      ...params.settings
+    }, () => {
+      mainWindow.webContents.send('print-complete', 'done')
+      printWindow.close()
+    })
+    return true;
+  })
+})
+
+

@@ -21,19 +21,19 @@ const {
       }
     },
     receive: (channel, func) => {
-      let validChannels = [] // <-- Array of all ipcMain Channels used in the electron
+      let validChannels = ['print-this'] // <-- Array of all ipcMain Channels used in the electron
       if (validChannels.includes(channel)) {
         ipcRenderer.on(channel, (event, ...args) => func(...args))
       }
     },
     once: (channel, func) => {
-      let validChannels = [] // <-- Array of all ipcMain Channels used in the electron
+      let validChannels = ['print-complete'] // <-- Array of all ipcMain Channels used in the electron
       if (validChannels.includes(channel)) {
         ipcRenderer.once(channel, (event, ...args) => func(...args))
       }
     },
     invoke: (channel, data) => {
-      let validChannels = ['database-function'];  // <-- Array of all ipcMain Channels used in the electron
+      let validChannels = ['database-function','print-window'];  // <-- Array of all ipcMain Channels used in the electron
       if (validChannels.includes(channel)) {
         return ipcRenderer.invoke(channel, data);
       }

@@ -60,10 +60,12 @@
         <!-- category section  -->
         <div class="h-[7%]  shadow-sm  border-b-[0.5px] flex items-center p-7 space-x-12">
           <p @click="this.selected_category = ''"
-            class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md" :class="this.selected_category==''?'shadow-md border py-2 px-3 rounded-lg bg-slate-200': 'shadow-md border py-2 px-3 rounded-lg bg-white'">
+            class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md"
+            :class="this.selected_category == '' ? 'shadow-md border py-2 px-3 rounded-lg bg-slate-200' : 'shadow-md border py-2 px-3 rounded-lg bg-white'">
             <i class="fas fa-icicles" aria-hidden="true"></i> All Categories
           </p>
-          <div v-for="category in categories" :key="category.dataValues.id" :class="this.selected_category==category.dataValues.id ?'shadow-md border py-2 px-3 rounded-lg bg-slate-200': 'shadow-md border py-2 px-3 rounded-lg bg-white-200'">
+          <div v-for="category in categories" :key="category.dataValues.id"
+            :class="this.selected_category == category.dataValues.id ? 'shadow-md border py-2 px-3 rounded-lg bg-slate-200' : 'shadow-md border py-2 px-3 rounded-lg bg-white-200'">
             <p @click="this.selected_category = category.dataValues.id"
               class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
               <i class="fas fa-leaf"></i> {{ category.dataValues.name }}
@@ -155,31 +157,30 @@
             <p class="text-gray-500">SubTotal</p>
             <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
                 class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
-                 :value="cartData.sub_total" readonly/></p>
+                :value="cartData.sub_total" readonly /></p>
           </div>
           <div class="flex justify-between items-center text-sm px-3">
             <p class="text-gray-500">Tax 10%</p>
             <p class="text-gray-800 w-[70px]"> <span class="text-primary">$</span> {{ cartData.tax_total }}</p>
             <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
                 class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
-                placeholder="Enter Discount Amount" :value="cartData.tax_total" readonly/></p>
+                placeholder="Enter Discount Amount" :value="cartData.tax_total" readonly /></p>
           </div>
           <div class="flex justify-between items-center text-sm px-3 w-full">
             <p class="text-gray-500">Discount</p>
             <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text" v-model="discount"
-                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
-                /></p>
+                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]" /></p>
           </div>
           <div class="border-border border-dashed  border-b-[1px]"></div>
           <div class="flex justify-between items-center text-sm px-3 pb-3">
             <p class="text-gray-500">Total Payment</p>
             <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
                 class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
-                placeholder="Enter Discount Amount" :value="cartData.net_total" readonly/></p>
+                placeholder="Enter Discount Amount" :value="cartData.net_total" readonly /></p>
           </div>
         </div>
         <div class="h-[5%] rounded-lg w-full pt-1">
-          <p
+          <p @click="printBill()"
             class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
             Place an Order
           </p>
@@ -303,6 +304,24 @@ export default {
     logout() {
       this.authStore.$reset()
       this.$router.push({ name: 'login' })
+    },
+    printBill() {
+      let settings = {}
+      let data = this.$el.outerHTML;
+      // if(this.settingStore.print_settings && this.settingStore.print_settings.print_template == 3)
+      // {
+      //     console.log('thermal print')
+      //     settings = {
+      //         margins:{
+      //             marginType : 'none',
+      //         },
+      //     }
+      //     window.ipcRenderer.invoke("print-window", { data: data,settings : settings,type : 'thermal'}).then((response) => {
+      //     });
+      //     return
+      // }
+      window.ipcRenderer.invoke("print-window", { data: data, settings: settings }).then((response) => {
+      });
     },
     async getProductCreateInitialItems() {
       window.ipcRenderer.invoke('database-function', { target: 'get-pos-create-initial-items' }).then((response) => {
