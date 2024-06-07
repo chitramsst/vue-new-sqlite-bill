@@ -25,13 +25,14 @@ module.exports = function () {
   db.Unit = require("./models/Unit")(sequelize, Sequelize);
   db.Supplier = require("./models/Supplier")(sequelize, Sequelize);
   db.Product = require("./models/Product")(sequelize, Sequelize);
+  db.Customer = require("./models/Customer")(sequelize, Sequelize);
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;
   instance = db;
   return db;
 };
-
+ 
 module.exports.getDB = function () {
   return instance;
 };

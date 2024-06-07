@@ -4,14 +4,20 @@
     <!-- header section  -->
     <div class="h-[7%]  shadow-sm  border-b-[0.5px] border-border flex flex-row justify-between p-5 items-center">
       <div class=" text-sm">
-        <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[300%] outline-0"
-          placeholder="Choose the product to add cart" />
+        <!-- <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[300%] outline-0"
+          placeholder="Choose Customer" /> -->
+        <select class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
+          v-model="selected_supplier" :class="{ 'border-red-500': v$.selected_supplier.$error || error }">
+          <option value=''>Choose Customer</option>
+          <option :value="customer.dataValues.id" v-for="customer in customers" :key="'customer.dataValues.id'">
+            {{ customer.dataValues.contact_person }} [{{ customer.dataValues.supplier_id }}]</option>
+        </select>
       </div>
       <div class="flex flex-row space-x-5">
         <div class="flex flex-row space-x-2">
           <p
             class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
-            <i class="fas fa-plus"></i> Create a Note
+            <i class="fas fa-plus"></i> Create Customer
           </p>
           <p
             class="text-gray-500 py-2 px-3 text-wrap  border-[0.5px] border-border  rounded-lg flex items-center justify-center gap-3 text-sm font-semibold">
@@ -54,10 +60,10 @@
         <!-- category section  -->
         <div class="h-[7%]  shadow-sm  border-b-[0.5px] flex items-center p-7 space-x-12">
           <p @click="this.selected_category = ''"
-            class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
+            class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md" :class="this.selected_category==''?'shadow-md border py-2 px-3 rounded-lg bg-slate-200': 'shadow-md border py-2 px-3 rounded-lg bg-white'">
             <i class="fas fa-icicles" aria-hidden="true"></i> All Categories
           </p>
-          <div v-for="category in categories" :key="category.dataValues.id">
+          <div v-for="category in categories" :key="category.dataValues.id" :class="this.selected_category==category.dataValues.id ?'shadow-md border py-2 px-3 rounded-lg bg-slate-200': 'shadow-md border py-2 px-3 rounded-lg bg-white-200'">
             <p @click="this.selected_category = category.dataValues.id"
               class=" text-gray-500 text-wrap   rounded-lg flex items-center justify-center gap-2 text-sm hover:text-gray-800 hover:text-md">
               <i class="fas fa-leaf"></i> {{ category.dataValues.name }}
@@ -147,23 +153,32 @@
           <p class="font-bold"> Detail Payment </p>
           <div class="flex justify-between items-center text-sm px-3">
             <p class="text-gray-500">SubTotal</p>
-            <p class="text-gray-800"> <span class="text-primary">$</span>500 </p>
+            <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
+                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
+                 :value="cartData.sub_total" readonly/></p>
           </div>
           <div class="flex justify-between items-center text-sm px-3">
             <p class="text-gray-500">Tax 10%</p>
-            <p class="text-gray-800"> <span class="text-primary">$</span>50 </p>
+            <p class="text-gray-800 w-[70px]"> <span class="text-primary">$</span> {{ cartData.tax_total }}</p>
+            <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
+                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
+                placeholder="Enter Discount Amount" :value="cartData.tax_total" readonly/></p>
           </div>
-          <div class="flex justify-between items-center text-sm px-3">
+          <div class="flex justify-between items-center text-sm px-3 w-full">
             <p class="text-gray-500">Discount</p>
-            <p class="text-gray-800"> <span class="text-primary">$</span>50 </p>
+            <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text" v-model="discount"
+                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
+                /></p>
           </div>
-          <div class="border-border border-dashed  border-b-[1px] py-3 "></div>
-          <div class="flex justify-between items-center text-sm px-3 pt-3">
+          <div class="border-border border-dashed  border-b-[1px]"></div>
+          <div class="flex justify-between items-center text-sm px-3 pb-3">
             <p class="text-gray-500">Total Payment</p>
-            <p class="text-gray-800"> <span class="text-primary">$</span>600 </p>
+            <p class="text-gray-800"> <span class="text-primary">$ </span><input type="text"
+                class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3  outline-0 w-[80px]"
+                placeholder="Enter Discount Amount" :value="cartData.net_total" readonly/></p>
           </div>
         </div>
-        <div class="h-[5%] rounded-lg w-full pt-3">
+        <div class="h-[5%] rounded-lg w-full pt-1">
           <p
             class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
             Place an Order
@@ -176,24 +191,36 @@
 </template>
 <script>
 import { useAuthStore } from '@/stores/authStore';
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
 export default {
+  setup() {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       menuOpen: false,
       count: new Array(10).fill(1),
       authStore: useAuthStore(),
       categories: [],
-      suppliers: [],
+      customers: [],
       units: [],
       brands: [],
       order_code: "",
       selected_category: "",
       products: "",
       cartItems: [],
-      total_quantity : 0,
-      sub_total : 0,
-      tax_total : 0,
-      net_total : 0
+      cartData: {
+        total_quantity: 0,
+        sub_total: 0,
+        tax_total: 0,
+        net_total: 0,
+        discount_total: 0
+      },
+      discount_type: 1,
+      discount: 0,
+      selected_supplier: '',
+      error: false,
     };
   },
   mounted() {
@@ -226,6 +253,7 @@ export default {
         this.cartItems[index].quantity = this.cartItems[index].quantity + 1
       }
       this.storeToLocalStorage();
+      this.calculateDetail();
     },
     decrement(id) {
       let index = this.cartItems.findIndex((x) => x.id == id)
@@ -237,13 +265,40 @@ export default {
         }
       }
       this.storeToLocalStorage();
+      this.calculateDetail();
     },
-    storeToLocalStorage(){
+    storeToLocalStorage() {
       const cartItemsJSON = JSON.stringify(this.cartItems);
       localStorage.setItem('cartItems', cartItemsJSON);
     },
-    calculateDetail(){
+    calculateDetail() {
+      let tax_total = 0;
+      let sub_total = 0;
+      let net_total = 0;
 
+      this.cartItems.forEach((x) => {
+        let itemTax = (x.price * x.quantity) * (this.cartData.tax_percentage / 100)
+        let temp_selling_price = parseFloat(x.selling_price) * parseFloat(x.quantity)
+        let temp_tax = temp_selling_price * (x.tax_rate / 100)
+
+        x.tax = itemTax
+        x.total = temp_selling_price + temp_tax
+
+        tax_total += temp_tax
+        sub_total += temp_selling_price
+        net_total += net_total
+      })
+      let discount = 0;
+      if (this.discount_type == 1) {
+        discount = this.discount
+      }
+      else {
+        discount = net_total * (this.discount / 100)
+      }
+      this.cartData.discount_total = discount
+      this.cartData.sub_total = sub_total
+      this.cartData.tax_total = tax_total
+      this.cartData.net_total = sub_total + tax_total - discount;
     },
     logout() {
       this.authStore.$reset()
@@ -258,7 +313,8 @@ export default {
           this.categories = response.categories;
           this.brands = response.brands;
           this.units = response.units;
-          this.suppliers = response.suppliers;
+          this.customers = response.customers;
+          //  alert(JSON.stringify(this.customers))
           this.order_code = response.order_code;
           this.products = response.products;
         }
@@ -279,6 +335,18 @@ export default {
         return this.products;
       }
     }
-  }
+  },
+  watch: {
+    selected_supplier() {
+      if (this.error) {
+        this.error = false;
+      }
+    }
+  },
+  validations() {
+    return {
+      selected_supplier: { required },
+    }
+  },
 };
 </script>

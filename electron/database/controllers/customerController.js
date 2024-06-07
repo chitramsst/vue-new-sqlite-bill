@@ -1,47 +1,37 @@
 const db = require('../db').getDB()
-const Supplier = db.Supplier;
+const Customer = db.Customer;
 const { Op } = require("sequelize");
 
 /* fetch item */
 exports.get_items = async (data) => {
-    let suppliers = await Supplier.findAll({order: [
+    let customers = await Customer.findAll({order: [
         ['createdAt', 'DESC']
     ]
 })
     return  {
-        items : suppliers,
+        items : customers,
         success : true
     }
 }
 /* create item */
 exports.create_item = async (data) => {
-    let supplier = await Supplier.create({
-        supplier_code: data.supplier_code,
-        company_name: data.company_name,
-        supplier_type: data.supplier_type,
-        supplier_category: data.supplier_category,
-        contact_person: data.contact_person,
+    let customer = await Customer.create({
+        customer_code: data.customer_code,
+        first_name: data.first_name,
+        last_name: data.last_name,
         phone_number: data.phone_number,
         email_address: data.email_address,
-        website: data.website,
         address: data.address,
-        tax_vat_number: data.tax_vat_number,
-        notes: data.notes,
-        bank_name: data.bank_name,
-        bank_branch: data.bank_branch,
         is_active: data.is_active,
-        bank_account_number: data.bank_account_number,
-        bank_code: data.bank_code,
-        opening_balance: data.opening_balance
     });
     return {
-      item: supplier,
+      item: customer,
       success: true,
     };
   };
   
   exports.edit_item= async (data) => {
-    await Supplier.update(
+    await Customer.update(
       {
         name: data.name,
         is_active: data.is_active,
@@ -52,26 +42,26 @@ exports.create_item = async (data) => {
         },
       }
     );
-    let supplier = await Supplier.findOne({
+    let customer = await Customer.findOne({
       where: {
         id: data.item_id,
       },
     });
     return {
-      item: supplier,
+      item: customer,
       success: true,
     };
   };
   
   exports.delete_item = async (data) => {
-    let supplier = await Supplier.findOne({
+    let customer = await Customer.findOne({
       where: {
         id: data.item_id,
       },
     });
     // let expense = await db.Expense.findOne({
     //   where: {
-    //     expense_supplier: data.item_id,
+    //     expense_customer: data.item_id,
     //   },
     // });
     // if (expense) {
@@ -80,7 +70,7 @@ exports.create_item = async (data) => {
     //     message: "PREVENT_DELETE",
     //   };
     // }
-    await supplier.destroy();
+    await customer.destroy();
     return {
       success: true,
     };
