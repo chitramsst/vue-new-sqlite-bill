@@ -85,7 +85,8 @@ ipcMain.handle('print-window', async (event, params) => {
     printWindow.webContents.send('print-this', params)
     await delay(500)
     printWindow.webContents.print({
-      silent: true,
+      silent: false,
+      printBackground: true,
       ...params.settings
     }, () => {
       mainWindow.webContents.send('print-complete', 'done')
@@ -93,6 +94,7 @@ ipcMain.handle('print-window', async (event, params) => {
     })
     return true;
   })
+  
 })
 
 
