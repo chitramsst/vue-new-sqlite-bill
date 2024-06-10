@@ -3,7 +3,7 @@
   <div class="w-[100px] bg-sidebar flex justify-start flex-col items-center space-y-6">
     <router-link to="/home">
       <p
-        class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10">
+        class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10 hover:bg-gray-200">
         <Tooltip text="POS">
         <i class="fa-brands fa-canadian-maple-leaf"></i>
         </Tooltip>
@@ -28,7 +28,7 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <Tooltip text="Inventory">
             <i class="fa-solid fa-layer-group"></i>
@@ -60,7 +60,7 @@
       </li>
       <li x-data="{ open: false }">
         <div x-show="open" x-transition
-          class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
+          class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar ">
           <div class="px-1">
             <ul>
               <router-link to="/supplier">
@@ -69,7 +69,7 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <Tooltip text="Supplier">
           <i class="fa fa-shopping-cart"></i>
@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <Tooltip text="Customer">
             <i class="fa fa-user"></i>
@@ -112,8 +112,8 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
-          x-on:click="open = ! open" x-on:click.outside="open = false">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
+          x-on:click="open = ! open" x-on:click.outside="open = false" >
           <Tooltip text="Settings">
           <i class="fa-solid fa-truck-monster"></i>
           </Tooltip>
