@@ -15,6 +15,7 @@ exports.get_items = async (data) => {
 }
 /* create item */
 exports.create_item = async (data) => {
+  let customer_data = await generateCustomerCode();
     let customer = await Customer.create({
         customer_code: data.customer_code,
         first_name: data.first_name,
@@ -22,6 +23,9 @@ exports.create_item = async (data) => {
         phone_number: data.phone_number,
         email_address: data.email_address,
         address: data.address,
+        tax_vat_number: data.tax_vat_number,
+        customer_code: customer_data.customer_code,
+        customer_prefix : customer_data.prefix,
         is_active: data.is_active,
     });
     return {
@@ -34,6 +38,12 @@ exports.create_item = async (data) => {
     await Customer.update(
       {
         name: data.name,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone_number: data.phone_number,
+        email_address: data.email_address,
+        address: data.address,
+        tax_vat_number: data.tax_vat_number,
         is_active: data.is_active,
       },
       {
@@ -75,3 +85,44 @@ exports.create_item = async (data) => {
       success: true,
     };
   };
+
+
+/* get needed items for customer creation */
+exports.get_customer_create_initial_items = async (data) => {
+  let customer_data = await generateCustomerCode();
+  return {
+    success: true,
+    customer_code: customer_data.prefix+'_'+customer_data.customer_code
+  };
+};
+
+  async function generateCustomerCode() {
+    // let settings = await db.MasterSetting.findAll()
+    // let array  = {};
+    // settings.forEach((item) => {
+    //     array[item.dataValues.title] = item.dataValues.value;
+    // })
+    // let prefix = array['invoice_prefix'] ? array['invoice_prefix'] : null;
+    let prefix = "CU";
+    let lastCustomer = await Customer.findOne({
+      order: [["createdAt", "DESC"]],
+    });
+  
+    if (lastCustomer) {
+      if (prefix) {
+        return {
+          prefix,
+          customer_code: parseInt(lastCustomer.customer_code) + 1,
+        };
+      } else {
+        return {
+          prefix: null,
+          customer_code: parseInt(lastCustomer.customer_code) + 1,
+        };
+      }
+    }
+    return {
+      prefix,
+      customer_code: 1,
+    };
+  }

@@ -4,7 +4,7 @@ const brand_controller = require("./controllers/brandController");
 const unit_controller = require("./controllers/unitController");
 const product_controller = require("./controllers/productController");
 const supplier_controler = require('./controllers/supplierController')
-const customer_controler = require('./controllers/customerController')
+const customer_controller = require('./controllers/customerController')
 const pos_controller = require("./controllers/posController");
 
 module.exports = {
@@ -76,14 +76,16 @@ module.exports = {
 
 
        /* customers */
+       case "get-customer-create-initial-items":
+        return customer_controller.get_customer_create_initial_items(params.data);
        case "get-customers":
-        return customer_controler.get_items(params.data);
+        return customer_controller.get_items(params.data);
       case "create-customer":
-        return customer_controler.create_item(params.data);
+        return customer_controller.create_item(params.data);
       case "edit-customer":
-        return customer_controler.edit_item(params.data);
+        return customer_controller.edit_item(params.data);
       case "delete-customer":
-        return customer_controler.delete_item(params.data);
+        return customer_controller.delete_item(params.data);
       /* end suppliers */
 
 

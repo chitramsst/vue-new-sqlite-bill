@@ -34,7 +34,7 @@
             <img src="https://via.placeholder.com/50" alt="Avatar"
               class="w-10 h-10 rounded-full border border-gray-300" />
             <div>
-              <p class="font-bold text-xs">{{ authStore.user.name }}</p>
+              <p class="font-bold text-xs">{{ authStore.user?authStore.user.name:'' }}</p>
               <p class="text-xs text-gray-400">{{ authStore.user.user_type == 1 ? 'admin' : 'member' }}</p>
             </div>
             <div

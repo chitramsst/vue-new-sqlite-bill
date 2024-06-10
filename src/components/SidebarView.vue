@@ -70,6 +70,22 @@
           <i class="fa fa-shopping-cart"></i>
         </p>
       </li>
+      <li x-data="{ open: false }">
+        <div x-show="open" x-transition
+          class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
+          <div class="px-1">
+            <ul>
+              <router-link to="/customer">
+                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Customer</li>
+              </router-link>
+            </ul>
+          </div>
+        </div>
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
+          x-on:click="open = ! open" x-on:click.outside="open = false">
+          <i class="fa fa-user"></i>
+        </p>
+      </li>
       <li>
         <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
           <i class="fa-solid fa-circle-dollar-to-slot"></i>

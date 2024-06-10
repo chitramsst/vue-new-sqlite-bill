@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         address: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         tax_vat_number: {
             type: DataTypes.STRING,
