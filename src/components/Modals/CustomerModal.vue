@@ -126,7 +126,6 @@
         },
       closeModal() {
         this.resetData()
-        this.getCustomerCreateInitialItems();
         this.$emit('close');
       },
       editItem(item) {
@@ -193,6 +192,7 @@
               type: 'create',
               item: response.item
             })
+            this.getCustomerCreateInitialItems();
             // this.$emitter.emit('notify',{
             //     title : this.$t('Success'),
             //     subtitle : this.$t('Expense Customer has been created'),
