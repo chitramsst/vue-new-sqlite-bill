@@ -39,6 +39,10 @@
                                     <tr>
                                         <th
                                             class="px-5 py-3 border-b-2 border-slate-200 bg-slate-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                            Code
+                                        </th>
+                                        <th
+                                            class="px-5 py-3 border-b-2 border-slate-200 bg-slate-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Name
                                         </th>
                                         <th
@@ -54,6 +58,15 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in itemResults" :key="item.id">
+                                        <td class="px-5 py-5 border-b border-slate-200 bg-white text-sm">
+                                            <div class="flex">
+                                                <div class="ml-3">
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        {{ item.dataValues.customer_prefix }}_{{ item.dataValues.customer_code }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="px-5 py-5 border-b border-slate-200 bg-white text-sm">
                                             <div class="flex">
                                                 <div class="ml-3">
@@ -225,7 +238,18 @@ export default {
     },
     computed: {
         itemResults() {
-            return this.items.filter((x) => x.dataValues.first_name.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
+            return this.items.filter((x) => {
+                if(this.search.trim() == '')
+                {
+                    return true;
+                }
+            return ((x.dataValues.customer_prefix+'_'+x.dataValues.customer_code).toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) || 
+                    (x.dataValues.phone_number).toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) ||
+                    (x.dataValues.first_name+' '+x.dataValues.last_name).toLocaleLowerCase().includes(this.search.toLocaleLowerCase())
+                   )
+            //return (x.prefix + '-' + x.number).toLowerCase().includes(this.search.toLowerCase()) || (x.supplier?.name)?.toLowerCase()?.includes(this.search.toLowerCase())  
+        }
+        )
         }
     }
 }

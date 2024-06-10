@@ -126,6 +126,7 @@
         },
       closeModal() {
         this.resetData()
+        this.getCustomerCreateInitialItems();
         this.$emit('close');
       },
       editItem(item) {
