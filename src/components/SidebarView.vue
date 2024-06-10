@@ -4,7 +4,9 @@
     <router-link to="/home">
       <p
         class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10">
+        <Tooltip text="POS">
         <i class="fa-brands fa-canadian-maple-leaf"></i>
+        </Tooltip>
       </p>
     </router-link>
     <ul class="mt-5 flex flex-col space-y-5">
@@ -28,7 +30,9 @@
         </div>
         <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
           x-on:click="open = ! open" x-on:click.outside="open = false">
-          <i class="fa-solid fa-layer-group"></i>
+          <Tooltip text="Inventory">
+            <i class="fa-solid fa-layer-group"></i>
+          </Tooltip>
         </p>
       </li>
 
@@ -67,7 +71,9 @@
         </div>
         <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
           x-on:click="open = ! open" x-on:click.outside="open = false">
+          <Tooltip text="Supplier">
           <i class="fa fa-shopping-cart"></i>
+          </Tooltip>
         </p>
       </li>
       <li x-data="{ open: false }">
@@ -76,14 +82,18 @@
           <div class="px-1">
             <ul>
               <router-link to="/customer">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Customer</li>
+                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded"> Customer</li>
               </router-link>
             </ul>
           </div>
         </div>
+
         <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
           x-on:click="open = ! open" x-on:click.outside="open = false">
-          <i class="fa fa-user"></i>
+          <Tooltip text="Customer">
+            <i class="fa fa-user"></i>
+          </Tooltip>
+
         </p>
       </li>
       <li>
@@ -104,7 +114,9 @@
         </div>
         <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
           x-on:click="open = ! open" x-on:click.outside="open = false">
+          <Tooltip text="Settings">
           <i class="fa-solid fa-truck-monster"></i>
+          </Tooltip>
         </p>
       </li>
       <li>
@@ -120,6 +132,7 @@
 
 <script lang="ts">
 import { useAuthStore } from '@/stores/authStore';
+import Tooltip from './Common/Tooltip.vue';
 export default {
   data() {
     return {
@@ -142,9 +155,12 @@ export default {
             this.authStore.$reset()
             this.$router.push({ name: 'login' })
           }
-         }
+        }
       })
     }
-  }
+  },
+  components: {
+    Tooltip,
+  },
 };
 </script>
