@@ -3,7 +3,7 @@ const Product = db.Product;
 const Category = db.Category;
 const Unit = db.Unit;
 const Brand = db.Brand;
-const Supplier = db.Supplier
+const Customer = db.Customer
 const { Op } = require("sequelize");
 const moment = require('moment')
 
@@ -37,7 +37,7 @@ exports.get_pos_create_initial_items = async (data) => {
       is_active: 1,
     },
   });
-  let suppliers = await Supplier.findAll({
+  let customers = await Customer.findAll({
     order: [["createdAt", "DESC"]],
     where: {
       is_active: 1,
@@ -53,7 +53,7 @@ exports.get_pos_create_initial_items = async (data) => {
     categories: categories,
     brands: brands,
     units: units,
-    suppliers: suppliers,
+    customers: customers,
     success: true,
     product_code: product_data.product_code,
     products: products

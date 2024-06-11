@@ -7,10 +7,10 @@
         <!-- <input type="text" class="border-[0.5px] border-border rounded-lg ring-0 py-2 px-3 w-[300%] outline-0"
           placeholder="Choose Customer" /> -->
         <select class="border-[0.5px] border-[#C1E1C1] rounded-lg ring-0 py-3 px-3 w-full outline-0"
-          v-model="selected_supplier" :class="{ 'border-red-500': v$.selected_supplier.$error || error }">
+          v-model="selected_customer" :class="{ 'border-red-500': v$.selected_customer.$error || error }">
           <option value=''>Choose Customer</option>
           <option :value="customer.dataValues.id" v-for="customer in customers" :key="'customer.dataValues.id'">
-            {{ customer.dataValues.contact_person }} [{{ customer.dataValues.supplier_id }}]</option>
+            {{ customer.dataValues.first_name }} {{ customer.dataValues.last_name }} [{{ customer.dataValues.customer_prefix }}_{{ customer.dataValues.customer_code }}]</option>
         </select>
       </div>
       <div class="flex flex-row space-x-5">
@@ -180,7 +180,7 @@
           </div>
         </div>
         <div class="h-[5%] rounded-lg w-full pt-1">
-          <p @click="printBill()"
+          <p @click="saveBill()"
             class=" text-white py-2 px-3 text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-sm">
             Place an Order
           </p>
@@ -194,6 +194,9 @@
 import { useAuthStore } from '@/stores/authStore';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
+import PrintPOSView from './PrintPOSView.vue';
+import { mount } from 'mount-vue-component';
+
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -220,7 +223,7 @@ export default {
       },
       discount_type: 1,
       discount: 0,
-      selected_supplier: '',
+      selected_customer: '',
       error: false,
     };
   },
@@ -320,8 +323,17 @@ export default {
       //     });
       //     return
       // }
-      window.ipcRenderer.invoke("print-window", { data: data, settings: settings }).then((response) => {
-      });
+      // window.ipcRenderer.invoke("print-window", { data: data, settings: settings }).then((response) => {
+      // });
+
+      // alert(JSON.stringify(this.cartData))
+
+      // let { vNode, destroy, el } = mount(PrintPOSView, { props: { cartItems: this.cartItems, cartData: this.cartData, authStore : this.authStore, moment : this.$moment } })
+      //       window.ipcRenderer.once('print-complete', () => {
+      //           console.log('print complete!');
+      //           destroy()
+      //       })
+
     },
     async getProductCreateInitialItems() {
       window.ipcRenderer.invoke('database-function', { target: 'get-pos-create-initial-items' }).then((response) => {
@@ -356,7 +368,7 @@ export default {
     }
   },
   watch: {
-    selected_supplier() {
+    selected_customer() {
       if (this.error) {
         this.error = false;
       }
@@ -364,8 +376,11 @@ export default {
   },
   validations() {
     return {
-      selected_supplier: { required },
+      selected_customer: { required },
     }
   },
+  components() {
+    PrintPOSView
+  }
 };
 </script>

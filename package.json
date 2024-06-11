@@ -28,6 +28,7 @@
     "express": "^4.19.2",
     "mitt": "^3.0.1",
     "moment": "^2.30.1",
+    "mount-vue-component": "^0.10.2",
     "mysql2": "^3.9.8",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
