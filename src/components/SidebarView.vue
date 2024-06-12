@@ -32,8 +32,6 @@
           <i class="fa-solid fa-layer-group"></i>
         </p>
       </li>
-
-
       <li x-data="{ open: false }">
         <div x-show="open" x-transition
           class="absolute left-[94px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
