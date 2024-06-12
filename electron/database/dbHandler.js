@@ -92,10 +92,9 @@ module.exports = {
        /* pos */
       case "get-pos-create-initial-items":
         return pos_controller.get_pos_create_initial_items(params.data);
-
-  
+      case "create-pos":
+        return pos_controller.create_pos(params.data);
         /* end pos */
-        
       }
     }
   ),

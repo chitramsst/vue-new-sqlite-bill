@@ -10,7 +10,7 @@
           v-model="selected_customer" :class="{ 'border-red-500': v$.selected_customer.$error || error }">
           <option value=''>Choose Customer</option>
           <option :value="customer.dataValues.id" v-for="customer in customers" :key="'customer.dataValues.id'">
-            {{ customer.dataValues.first_name }} {{ customer.dataValues.last_name }} [{{ customer.dataValues.customer_prefix }}_{{ customer.dataValues.customer_code }}]</option>
+            {{ customer.dataValues.first_name }} {{ customer.dataValues.last_name }}      [{{ customer.dataValues.customer_prefix }}_{{ customer.dataValues.customer_code }}]</option>
         </select>
       </div>
       <div class="flex flex-row space-x-5">
@@ -211,6 +211,7 @@ export default {
       units: [],
       brands: [],
       order_code: "",
+      note: "",
       selected_category: "",
       products: "",
       cartItems: [],
@@ -219,7 +220,8 @@ export default {
         sub_total: 0,
         tax_total: 0,
         net_total: 0,
-        discount_total: 0
+        discount_total: 0,
+        tax_percentage: 0
       },
       discount_type: 1,
       discount: 0,
@@ -279,6 +281,7 @@ export default {
       let tax_total = 0;
       let sub_total = 0;
       let net_total = 0;
+      let quantity = 0;
 
       this.cartItems.forEach((x) => {
         let itemTax = (x.price * x.quantity) * (this.cartData.tax_percentage / 100)
@@ -291,6 +294,7 @@ export default {
         tax_total += temp_tax
         sub_total += temp_selling_price
         net_total += net_total
+        quantity += parseFloat(x.quantity)
       })
       let discount = 0;
       if (this.discount_type == 1) {
@@ -303,6 +307,7 @@ export default {
       this.cartData.sub_total = sub_total
       this.cartData.tax_total = tax_total
       this.cartData.net_total = sub_total + tax_total - discount;
+      this.cartData.total_quantity = quantity;
     },
     logout() {
       this.authStore.$reset()
@@ -351,12 +356,41 @@ export default {
         }
       })
     },
-    async create() {
-      const isFormCorrect = await this.v$.$validate()
-      if (!isFormCorrect) {
-        return
-      }
-    }
+    async saveBill() {
+            const isFormCorrect = await this.v$.$validate()
+            if (!isFormCorrect) {
+                return
+            }
+            const cleanedCartItems = this.removeNonSerializable(this.cartItems);
+            const cleanedCartData = this.removeNonSerializable(this.cartData);
+            const customer = this.customers.find(item => item.dataValues.id === this.selected_customer);
+            const cleanedCustomer = this.removeNonSerializable(customer.dataValues);
+            const cleanedAuthStore = this.removeNonSerializable(this.authStore);
+            window.ipcRenderer.invoke('database-function', { target: 'create-pos', data: {   
+            cartData : cleanedCartData,
+            cartItems : cleanedCartItems,
+            customer:cleanedCustomer,
+            authStore : cleanedAuthStore
+            } }).then((response) => {
+                if (response.success == false) {
+                    this.error = true;
+                }
+                else {
+                  this.getProductCreateInitialItems()
+                    this.$router.push({
+                        name: 'product'
+                    })
+                }
+            })
+        },
+    removeNonSerializable(obj) {
+    return JSON.parse(JSON.stringify(obj, (key, value) => {
+        if (typeof value === 'function' || value instanceof Node) {
+            return undefined;
+        }
+        return value;
+    }));
+}
   },
   computed: {
     itemResults() {

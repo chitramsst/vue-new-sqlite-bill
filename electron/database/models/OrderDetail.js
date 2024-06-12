@@ -4,6 +4,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        product_prefix: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        product_code: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         product_id: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -12,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        product_unit_price: {
+        product_cost_price: {
             type: DataTypes.REAL,
             allowNull: false
         },
@@ -36,6 +44,26 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true
         },
+        product_hsCode: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+        product_brand: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+          },
+        product_unit: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+          },
+        product_expiry_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+          },
+        product_tax_rate: {
+            type: DataTypes.REAL,
+            allowNull: false,
+          },
     }, {});
     return OrderDetail;
 }

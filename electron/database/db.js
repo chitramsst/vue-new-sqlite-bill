@@ -26,6 +26,8 @@ module.exports = function () {
   db.Supplier = require("./models/Supplier")(sequelize, Sequelize);
   db.Product = require("./models/Product")(sequelize, Sequelize);
   db.Customer = require("./models/Customer")(sequelize, Sequelize);
+  db.Order = require("./models/Order")(sequelize, Sequelize);
+  db.OrderDetail = require("./models/OrderDetail")(sequelize, Sequelize);
 
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;

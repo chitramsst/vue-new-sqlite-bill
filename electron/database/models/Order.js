@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         order_prefix: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         total_quantity: {
             type: DataTypes.INTEGER,
@@ -50,6 +50,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: true
         },
+        customer_prefix: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        customer_code: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         customer_name: {
             type: DataTypes.INTEGER,
             allowNull: true
@@ -59,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         customer_email: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true
         },
         created_by: {
