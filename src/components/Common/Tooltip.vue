@@ -1,7 +1,7 @@
 <template>
     <div  @mouseenter="showTooltip" @mouseleave="hideTooltip">
       <slot></slot>
-      <div v-if="visible" class="tooltip text-black text-sm absolute px-3 py-5 bg-cyan-400" >
+      <div v-if="visible" class="tooltip text-black text-sm absolute px-3 py-5 bg-gray-400" >
         {{ text }}
       </div>
     </div>

@@ -3,15 +3,13 @@
   <div class="w-[100px] bg-sidebar flex justify-start flex-col items-center space-y-6">
     <router-link to="/home">
       <p
-        class=" text-white text-wrap  bg-primary rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10 hover:bg-gray-200">
-        <Tooltip text="POS">
+        class=" text-white text-wrap  bg-primary/30 rounded-lg flex items-center justify-center gap-3 text-3xl m-3 h-10 w-10 ">
         <i class="fa-brands fa-canadian-maple-leaf"></i>
-        </Tooltip>
       </p>
     </router-link>
     <ul class="mt-5 flex flex-col space-y-5">
 
-      <li x-data="{ open: false }">
+      <li x-data="{ open: false }" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
         <div x-show="open" x-transition
           class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
           <div class="px-1">
@@ -28,11 +26,10 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
-          x-on:click="open = ! open" x-on:click.outside="open = false">
-          <Tooltip text="Inventory">
-            <i class="fa-solid fa-layer-group"></i>
-          </Tooltip>
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+          x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
+          x-on:mouseleave="open = false">
+          <i class="fa-solid fa-layer-group"></i>
         </p>
       </li>
 
@@ -47,21 +44,22 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-regular fa-image"></i>
         </p>
       </li>
 
       <li>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
+        <p
+          class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
           <i class="fa-solid fa-arrows-to-dot"></i>
         </p>
       </li>
-      <li x-data="{ open: false }">
+      <li x-data="{ open: false }" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
         <div x-show="open" x-transition
           class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar ">
-          <div class="px-1">
+          <div class="px-1 ">
             <ul>
               <router-link to="/supplier">
                 <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Supplier</li>
@@ -69,14 +67,13 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
-          x-on:click="open = ! open" x-on:click.outside="open = false">
-          <Tooltip text="Supplier">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-20 bg-primary/30"
+          x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
+          x-on:mouseleave="open = false">
           <i class="fa fa-shopping-cart"></i>
-          </Tooltip>
         </p>
       </li>
-      <li x-data="{ open: false }">
+      <li x-data="{ open: false }" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
         <div x-show="open" x-transition
           class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
           <div class="px-1">
@@ -88,11 +85,11 @@
           </div>
         </div>
 
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
-          x-on:click="open = ! open" x-on:click.outside="open = false">
-          <Tooltip text="Customer">
-            <i class="fa fa-user"></i>
-          </Tooltip>
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+          x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
+          x-on:mouseleave="open = false">
+
+          <i class="fa fa-user"></i>
 
         </p>
       </li>
@@ -101,7 +98,7 @@
           <i class="fa-solid fa-circle-dollar-to-slot"></i>
         </p>
       </li>
-      <li x-data="{ open: false }">
+      <li x-data="{ open: false }" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
         <div x-show="open" x-transition
           class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
           <div class="px-1">
@@ -112,17 +109,19 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-200"
-          x-on:click="open = ! open" x-on:click.outside="open = false" >
-          <Tooltip text="Settings">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+          x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
+          x-on:mouseleave="open = false" :class="{ 'bg-green-200': open }">
           <i class="fa-solid fa-truck-monster"></i>
-          </Tooltip>
         </p>
       </li>
+
       <li>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30"
           @click="logout">
-          <i class="fa-solid fa-sign-out"></i>
+          <Tooltip text="Logout">
+            <i class="fa-solid fa-sign-out"></i>
+          </Tooltip>
         </p>
       </li>
     </ul>
