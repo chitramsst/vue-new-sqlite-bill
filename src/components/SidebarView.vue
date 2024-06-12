@@ -15,18 +15,18 @@
           <div class="px-1">
             <ul>
               <router-link to="/category">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Category</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded">Category</li>
               </router-link>
               <router-link to="/brand">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Brand</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded">Brand</li>
               </router-link>
               <router-link to="/product">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Product</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded">Product</li>
               </router-link>
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
          >
           <i class="fa-solid fa-layer-group"></i>
@@ -37,12 +37,12 @@
           class="absolute left-[94px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
           <div class="px-1">
             <ul>
-              <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded"></li>
-              <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded"></li>
+              <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded"></li>
+              <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded"></li>
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-regular fa-image"></i>
         </p>
@@ -50,7 +50,7 @@
 
       <li>
         <p
-          class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
+          class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
           <i class="fa-solid fa-arrows-to-dot"></i>
         </p>
       </li>
@@ -60,12 +60,12 @@
           <div class="px-1 ">
             <ul>
               <router-link to="/supplier">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Supplier</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded">Supplier</li>
               </router-link>
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  hover:bg-gray-20 bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  hover:bg-gray-20 bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
           x-on:mouseleave="open = false">
           <i class="fa fa-shopping-cart"></i>
@@ -77,13 +77,13 @@
           <div class="px-1">
             <ul>
               <router-link to="/customer">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded"> Customer</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded"> Customer</li>
               </router-link>
             </ul>
           </div>
         </div>
 
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10   bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10   bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
           x-on:mouseleave="open = false">
 
@@ -92,7 +92,7 @@
         </p>
       </li>
       <li>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
           <i class="fa-solid fa-circle-dollar-to-slot"></i>
         </p>
       </li>
@@ -102,12 +102,12 @@
           <div class="px-1">
             <ul>
               <router-link to="/unit">
-                <li class="text-gray-500 text-md hover:bg-gray-100 cursor-pointer px-2 py-1 rounded">Unit Settings</li>
+                <li class="text-white text-md hover:bg-gray-100 hover:text-gray-800 cursor-pointer px-2 py-1 rounded">Unit Settings</li>
               </router-link>
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
          :class="{ 'bg-green-200': open }">
           <i class="fa-solid fa-truck-monster"></i>
@@ -115,7 +115,7 @@
       </li>
 
       <li>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30"
+        <p class=" text-white text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30"
           @click="logout">
           <Tooltip text="Logout">
             <i class="fa-solid fa-sign-out"></i>
