@@ -26,9 +26,9 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
-          x-on:mouseleave="open = false">
+         >
           <i class="fa-solid fa-layer-group"></i>
         </p>
       </li>
@@ -44,7 +44,7 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar bg-primary/30"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false">
           <i class="fa-regular fa-image"></i>
         </p>
@@ -58,7 +58,7 @@
       </li>
       <li x-data="{ open: false }" x-on:mouseenter="open = true" x-on:mouseleave="open = false">
         <div x-show="open" x-transition
-          class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar ">
+          class="absolute left-[93px]  w-48 border-r border-t border-b border-gray-300 rounded-r-lg p-4 shadow-lg z-10 bg-sidebar">
           <div class="px-1 ">
             <ul>
               <router-link to="/supplier">
@@ -67,7 +67,7 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar hover:bg-gray-20 bg-primary/30"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  hover:bg-gray-20 bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
           x-on:mouseleave="open = false">
           <i class="fa fa-shopping-cart"></i>
@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10   bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
           x-on:mouseleave="open = false">
 
@@ -94,7 +94,7 @@
         </p>
       </li>
       <li>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10">
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-primary/30">
           <i class="fa-solid fa-circle-dollar-to-slot"></i>
         </p>
       </li>
@@ -109,9 +109,9 @@
             </ul>
           </div>
         </div>
-        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10 bg-sidebar  bg-primary/30"
+        <p class=" text-gray-500 text-wrap  rounded-lg flex items-center justify-center gap-3 text-2xl m-3 h-10 w-10  bg-primary/30"
           x-on:click="open = ! open" x-on:click.outside="open = false" x-on:mouseenter="open = true"
-          x-on:mouseleave="open = false" :class="{ 'bg-green-200': open }">
+         :class="{ 'bg-green-200': open }">
           <i class="fa-solid fa-truck-monster"></i>
         </p>
       </li>
