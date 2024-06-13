@@ -15,7 +15,12 @@ const router = createRouter({
       //@ts-ignore
       component: () => import('../views/POS/POSView.vue')
     },
-    ,
+    {
+      path: '/order',
+      name: 'order',
+      //@ts-ignore
+      component: () => import('../views/POS/OrderListView.vue')
+    },
     {
       path: '/category',
       name: 'category',

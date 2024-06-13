@@ -333,11 +333,11 @@ export default {
 
       // alert(JSON.stringify(this.cartData))
 
-      // let { vNode, destroy, el } = mount(PrintPOSView, { props: { cartItems: this.cartItems, cartData: this.cartData, authStore : this.authStore, moment : this.$moment } })
-      //       window.ipcRenderer.once('print-complete', () => {
-      //           console.log('print complete!');
-      //           destroy()
-      //       })
+      let { vNode, destroy, el } = mount(PrintPOSView, { props: { cartItems: this.cartItems, cartData: this.cartData, authStore : this.authStore, moment : this.$moment } })
+            window.ipcRenderer.once('print-complete', () => {
+                console.log('print complete!');
+                destroy()
+            })
 
     },
     async getProductCreateInitialItems() {
@@ -377,8 +377,9 @@ export default {
                 }
                 else {
                   this.getProductCreateInitialItems()
+                  this.printBill()
                     this.$router.push({
-                        name: 'product'
+                        name: 'order'
                     })
                 }
             })
