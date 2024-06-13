@@ -332,8 +332,8 @@ export default {
       // });
 
       // alert(JSON.stringify(this.cartData))
-
-      let { vNode, destroy, el } = mount(PrintPOSView, { props: { cartItems: this.cartItems, cartData: this.cartData, authStore : this.authStore, moment : this.$moment } })
+      const cleanedCartData = this.removeNonSerializable(this.cartData);
+      let { vNode, destroy, el } = mount(PrintPOSView, { props: { cartItems: this.cartItems, cartData: cleanedCartData, authStore : this.authStore, moment : this.$moment } })
             window.ipcRenderer.once('print-complete', () => {
                 console.log('print complete!');
                 destroy()
